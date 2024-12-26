@@ -1,19 +1,34 @@
-export default function SearchBar() {
+import { useState, useEffect } from 'react';
+
+export default function SearchBar({ dispatch }) {
+  const [keyword, setKeyWord] = useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (keyword.trim().length < 3) {
+      setKeyWord('');
+      return;
+    }
+    dispatch({ type: 'search', payload: keyword });
+    dispatch({ type: 'setLoadingState', payload: true });
+
+    setKeyWord('');
+  }
+
   return (
-    <div className='bg-[#bb8686] flex gap-4 p-5 rounded-md'>
+    <form
+      onSubmit={handleSubmit}
+      className='bg-[#bb8686] flex gap-4 p-5 rounded-md'>
       <button className='text-white font-bold bg-black p-1 rounded-md'>
         SEARCH
       </button>
       <input
         type='text'
-        placeholder='CITY'
+        placeholder='Enter text to search!'
         className='p-1 rounded-md outline-none'
+        value={keyword}
+        onChange={(e) => setKeyWord(e.target.value)}
       />
-      <input
-        type='text'
-        placeholder='KEYWORD'
-        className='p-1 rounded-md outline-none'
-      />
-    </div>
+    </form>
   );
 }
