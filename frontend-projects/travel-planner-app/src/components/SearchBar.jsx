@@ -19,7 +19,7 @@ export default function SearchBar({ dispatch }) {
     <form
       onSubmit={handleSubmit}
       className='bg-[#bb8686] flex gap-4 p-5 rounded-md'>
-      <button className='text-white font-bold bg-black p-1 rounded-md'>
+      <button className='text-white font-bold bg-black p-1 rounded-md hover:bg-slate-700'>
         SEARCH
       </button>
       <input
