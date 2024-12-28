@@ -8,7 +8,7 @@ export default function useFetchMyCityCode() {
     error: null,
   });
 
-  const [cityCode, setCityCode] = useState(null);
+  const [myCityCode, setMyCityCode] = useState(null);
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -54,7 +54,7 @@ export default function useFetchMyCityCode() {
           throw new Error('Failed to fetch Destination data');
         }
         const result = await response.json();
-        setCityCode(result.data[0].address.cityCode);
+        setMyCityCode(result.data[0].address.cityCode);
         console.log(result);
       } catch (error) {
         console.error('Error recieved', error.message);
@@ -63,5 +63,5 @@ export default function useFetchMyCityCode() {
     getLocation();
     fetchMyLocation();
   });
-  return cityCode;
+  return myCityCode;
 }

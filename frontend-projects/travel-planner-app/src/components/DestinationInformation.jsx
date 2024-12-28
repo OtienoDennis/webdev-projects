@@ -1,24 +1,30 @@
 import useFetchDataApi from '../fetchingFunctions/useFetchDataApi';
+import useFetchMyCityCode from '../fetchingFunctions/useFetchMyCityCode';
 import fetchWeatherForecast from '../fetchingFunctions/usefetchWeatherForecast';
 import { useParams } from 'react-router-dom';
 
 export default function DestinationInformation({ dispatch }) {
-  const {city, cityCode} = useParams();
-  console.log(city, cityCode);
+  const { city, cityCode } = useParams();
+  const myCityCode = useFetchMyCityCode();
+  const date = new Date().toISOString().split('T')[0];
+  const keyword = `${cityCode}&departureDate=${date}&adults=1`;
 
-  const URLHOTELOFFERS = `https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=`; // REQUIRES THE CODE AS THE KEYWORD
-  const URLFLIGHTOFFERS = `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=LON&destinationLocationCode=PAR&departureDate=2024-10-01&adults=1`; // will check on the required parameters NEXT
+  const URLHOTELOFFERS = `https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=`;
+  const URLFLIGHTOFFERS = `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${myCityCode}&destinationLocationCode=`;
 
+  // FETCHING HOTEL OFFERS
   useFetchDataApi(URLHOTELOFFERS, cityCode, dispatch, {
     dataActionType: 'hotelOffers',
     loadingActionType: 'setLoadingState',
   });
 
-  // useFetchDataApi(URLFLIGHTOFFERS, cityCode, dispatch, {
-  //   dataActionType: 'flightOffers',
-  //   loadingActionType: 'setLoadingState',
-  // });
+  // FETCHING FLIGHT OFFERS
+  useFetchDataApi(URLFLIGHTOFFERS, keyword, dispatch, {
+    dataActionType: 'flightOffers',
+    loadingActionType: 'setLoadingState',
+  });
 
+  // FETCHING WEATHER FORECAST
   fetchWeatherForecast(city, dispatch);
 
   return (

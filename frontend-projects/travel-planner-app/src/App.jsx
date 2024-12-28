@@ -55,15 +55,13 @@ function reducer(state, action) {
 }
 
 const URLDESTINATION = `https://test.api.amadeus.com/v1/reference-data/locations/cities?keyword=`;
-const URLHOTELOFFERS = `https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=`; // REQUIRES THE CODE AS THE KEYWORD
-const URLFLIGHTOFFERS = `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=LON&destinationLocationCode=PAR&departureDate=2024-10-01&adults=1`; 
-const testURL = `https://test.api.amadeus.com/v1/reference-data/locations/airports?latitude=37.7749&longitude=-122.4194&radius=100`;
+
 function App() {
   const [{ destinationInformation, keyword, loadingState }, dispatch] =
     useReducer(reducer, initialState);
 
   const debouncedKeyword = useDebounce(keyword, 1000);
-  useFetchDataApi(testURL, debouncedKeyword, dispatch, {
+  useFetchDataApi(URLDESTINATION, debouncedKeyword, dispatch, {
     dataActionType: 'destinationData',
     loadingActionType: 'setLoadingState',
   });
