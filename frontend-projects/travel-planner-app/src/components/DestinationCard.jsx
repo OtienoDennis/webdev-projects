@@ -1,6 +1,10 @@
 import CardInformation from './CardInformation';
 
-export default function DestinationCard({ keyword, information, loadingState}) {
+export default function DestinationCard({
+  keyword,
+  information,
+  loadingState,
+}) {
   const citiesArray = information?.data ?? [];
 
   if (loadingState === true && keyword) {
@@ -24,7 +28,8 @@ export default function DestinationCard({ keyword, information, loadingState}) {
           No information about{' '}
           <span className='text-gray-950 bg-red-500 py-1 px-2 rounded text-lg'>
             {keyword}
-          </span> ! ! !
+          </span>{' '}
+          ! ! !
         </h1>
       </div>
     );
@@ -33,7 +38,7 @@ export default function DestinationCard({ keyword, information, loadingState}) {
   if (citiesArray.length < 1) return;
 
   return (
-    <div>
+    <div className='mb-5'>
       <h1 className='text-2xl text-white font-extrabold text-center'>
         Related to the search{' '}
         <span className='text-gray-950 bg-amber-200 py-1 px-2 rounded text-lg'>
@@ -41,9 +46,17 @@ export default function DestinationCard({ keyword, information, loadingState}) {
         </span>
       </h1>
       {citiesArray.map((item, index) => {
-        let city = item['address']['cityName'];
+        let city = item['name'];
         let country = item['address']['countryName'];
-        return <CardInformation city={city} country={country} key={index} />;
+        const cityCode = citiesArray[index]?.address?.cityCode;
+        return (
+          <CardInformation
+            city={city}
+            country={country}
+            key={index}
+            cityCode={cityCode}
+          />
+        );
       })}
     </div>
   );

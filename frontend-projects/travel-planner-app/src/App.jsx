@@ -1,12 +1,17 @@
 import { useReducer } from 'react';
 import DestinationCard from './components/DestinationCard';
 import SearchBar from './components/SearchBar';
-import { useDebounce } from './customHooks/useDebounce';
-import { useFetchDestinationData } from './customHooks/useFetchDestinationData';
+import { useDebounce } from './fetchingFunctions/useDebounce';
 import DestinationInformation from './components/DestinationInformation';
+import useFetchDataApi from './fetchingFunctions/useFetchDataApi';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
 
 const initialState = {
   destinationInformation: [],
+  hotelInformation: [],
+  flightInformation: [],
+  weatherInformation: [],
   keyword: '',
   loadingState: true,
 };
@@ -18,11 +23,27 @@ function reducer(state, action) {
         ...state,
         destinationInformation: action.payload,
       };
+    case 'hotelOffers':
+      return {
+        ...state,
+        hotelInformation: action.payload,
+      };
+    case 'flightOffers':
+      return {
+        ...state,
+        flightInformation: action.payload,
+      };
+    case 'weatherData':
+      return {
+        ...state,
+        weatherInformation: action.payload,
+      };
     case 'search':
       return {
         ...state,
-        keyword: action.payload,
+        keyword: action.payload.toUpperCase(),
       };
+
     case 'setLoadingState':
       return {
         ...state,
@@ -33,38 +54,47 @@ function reducer(state, action) {
   }
 }
 
-const URL = `https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=`;
-const URL2 = `https://test.api.amadeus.com/v1/reference-data/locations/cities?keyword=`;
-const URL3 = `https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=`;
-const URL4 = `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=LON&destinationLocationCode=PAR&departureDate=2024-10-01&adults=1`;
-
+const URLDESTINATION = `https://test.api.amadeus.com/v1/reference-data/locations/cities?keyword=`;
+const URLHOTELOFFERS = `https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=`; // REQUIRES THE CODE AS THE KEYWORD
+const URLFLIGHTOFFERS = `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=LON&destinationLocationCode=PAR&departureDate=2024-10-01&adults=1`; 
+const testURL = `https://test.api.amadeus.com/v1/reference-data/locations/airports?latitude=37.7749&longitude=-122.4194&radius=100`;
 function App() {
   const [{ destinationInformation, keyword, loadingState }, dispatch] =
     useReducer(reducer, initialState);
 
   const debouncedKeyword = useDebounce(keyword, 1000);
-  useFetchDestinationData(URL, debouncedKeyword, dispatch);
-
-  // useEffect(() => {
-  //   if (data.length > 0) {
-  //     console.log(data);
-  //     dispatch({ type: 'destinationData', payload: data });
-  //   }
-  // }, [data, dispatch]);
+  useFetchDataApi(testURL, debouncedKeyword, dispatch, {
+    dataActionType: 'destinationData',
+    loadingActionType: 'setLoadingState',
+  });
 
   return (
     <div className='w-[calc(100vw-40px)] h-[calc(100vh-40px)] bg-sky-400 mx-auto my-5 rounded-md flex flex-col items-center gap-5 overflow-y-auto'>
-      <h1 className='text-blue-900 text-center pt-8 text-2xl font-bold font-sans'>
-        TRAVEL PLANNER
-      </h1>
-      <SearchBar dispatch={dispatch} />
-      {/* <DestinationCard
-        keyword={keyword}
-        information={destinationInformation}
-        loadingState={loadingState}
-        dispatch={dispatch}
-      /> */}
-      <DestinationInformation />
+      <Router>
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route
+              index
+              element={
+                <>
+                  <SearchBar dispatch={dispatch} />
+                  <DestinationCard
+                    keyword={keyword}
+                    information={destinationInformation}
+                    loadingState={loadingState}
+                    dispatch={dispatch}
+                  />
+                </>
+              }
+            />
+
+            <Route
+              path='destination/:city/:cityCode'
+              element={<DestinationInformation dispatch={dispatch} />}
+            />
+          </Route>
+        </Routes>
+      </Router>
     </div>
   );
 }

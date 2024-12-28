@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function SearchBar({ dispatch }) {
   const [keyword, setKeyWord] = useState('');
-
+  
   function handleSubmit(e) {
     e.preventDefault();
     if (keyword.trim().length < 3) {
@@ -11,7 +11,6 @@ export default function SearchBar({ dispatch }) {
     }
     dispatch({ type: 'search', payload: keyword });
     dispatch({ type: 'setLoadingState', payload: true });
-
     setKeyWord('');
   }
 
@@ -25,7 +24,7 @@ export default function SearchBar({ dispatch }) {
       <input
         type='text'
         placeholder='Enter text to search!'
-        className='p-1 rounded-md outline-none'
+        className='p-2 rounded-md outline-none'
         value={keyword}
         onChange={(e) => setKeyWord(e.target.value)}
       />
