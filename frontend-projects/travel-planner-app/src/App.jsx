@@ -7,6 +7,7 @@ import useFetchDataApi from './fetchingFunctions/useFetchDataApi';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import useFetchMyCityCode from './fetchingFunctions/useFetchMyCityCode';
+import { use } from 'react';
 
 const initialState = {
   destinationInformation: [],
@@ -50,7 +51,11 @@ function reducer(state, action) {
         ...state,
         keyword: action.payload.toUpperCase(),
       };
-
+    case 'setCurrentCity':
+      return {
+        ...state,
+        city: action.payload.toUpperCase(),
+      };
     case 'setLoadingState':
       return {
         ...state,
@@ -61,12 +66,14 @@ function reducer(state, action) {
   }
 }
 
-const URLDESTINATION = `https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=`;
+// const URLDESTINATION = `https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=`;
+const URLDESTINATION = `https://test.api.amadeus.com/v1/reference-data/locations/cities?include=AIRPORTS&keyword=`;
 
 function App() {
-  const myCityCode = useFetchMyCityCode() || 'NBO';
-  const [{ destinationInformation, keyword, loadingState }, dispatch] =
+  const [{ destinationInformation, keyword, loadingState, city }, dispatch] =
     useReducer(reducer, initialState);
+
+  const myCityCode = useFetchMyCityCode(useDebounce(city, 1000));
 
   const debouncedKeyword = useDebounce(keyword, 1000);
   useFetchDataApi(URLDESTINATION, debouncedKeyword, dispatch, {
@@ -95,7 +102,12 @@ function App() {
             />
             <Route
               path='destination/:city/:cityCode/:latitude/:longitude'
-              element={<DestinationInformation dispatch={dispatch} myCityCode={myCityCode}/>}
+              element={
+                <DestinationInformation
+                  dispatch={dispatch}
+                  myCityCode={myCityCode}
+                />
+              }
             />
           </Route>
         </Routes>
