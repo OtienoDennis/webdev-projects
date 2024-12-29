@@ -1,3 +1,7 @@
-export default function ErrorComponent() {
-  return <div>ErrorComponent</div>;
+export default function ErrorComponent({ errortext }) {
+  return (
+    <div className='text-2xl text-white font-extrabold text-center'>
+      {errortext}
+    </div>
+  );
 }
