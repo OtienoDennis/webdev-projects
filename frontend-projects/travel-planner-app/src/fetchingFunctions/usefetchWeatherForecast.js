@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 const apiKey = 'c4d3be2ad65f981855965239aa5b3a12';
 
-export default function fetchWeatherForecast(city, dispatch) {
+export default function useFetchWeatherForecast(city, dispatch) {
   const URLWEATHER = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
   useEffect(() => {
     const fetchWeatherData = async () => {
