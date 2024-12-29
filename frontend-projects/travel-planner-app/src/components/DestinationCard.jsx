@@ -49,12 +49,16 @@ export default function DestinationCard({
         let city = item['name'];
         let country = item['address']['countryName'];
         const cityCode = citiesArray[index]?.address?.cityCode;
+        const latitude = citiesArray[index]?.geoCode?.latitude;
+        const longitude = citiesArray[index]?.geoCode?.longitude;
         return (
           <CardInformation
             city={city}
             country={country}
             key={index}
             cityCode={cityCode}
+            latitude={latitude}
+            longitude={longitude}
           />
         );
       })}
