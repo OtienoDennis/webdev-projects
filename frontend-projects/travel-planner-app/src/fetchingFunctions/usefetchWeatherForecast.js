@@ -22,7 +22,7 @@ export default function useFetchWeatherForecast(city, dispatch) {
         dispatch({ type: 'weatherData', payload: convertedData });
       } catch (error) {
         setError(error.message);
-        console.error(error.message);
+        console.error("Weather API:", error.message);
       } finally {
         setLoading(false);
       }
