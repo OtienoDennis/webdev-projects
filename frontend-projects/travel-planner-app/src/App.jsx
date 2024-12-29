@@ -6,12 +6,14 @@ import DestinationInformation from './components/DestinationInformation';
 import useFetchDataApi from './fetchingFunctions/useFetchDataApi';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
+import useFetchMyCityCode from './fetchingFunctions/useFetchMyCityCode';
 
 const initialState = {
   destinationInformation: [],
   hotelInformation: [],
   flightInformation: [],
   weatherInformation: [],
+  topAttractionsInformation: [],
   keyword: '',
   loadingState: true,
 };
@@ -22,6 +24,11 @@ function reducer(state, action) {
       return {
         ...state,
         destinationInformation: action.payload,
+      };
+    case 'topAttractions':
+      return {
+        ...state,
+        topAttractionsInformation: action.payload,
       };
     case 'hotelOffers':
       return {
@@ -54,9 +61,10 @@ function reducer(state, action) {
   }
 }
 
-const URLDESTINATION = `https://test.api.amadeus.com/v1/reference-data/locations/cities?keyword=`;
+const URLDESTINATION = `https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=`;
 
 function App() {
+  const myCityCode = useFetchMyCityCode() || 'NBO';
   const [{ destinationInformation, keyword, loadingState }, dispatch] =
     useReducer(reducer, initialState);
 
@@ -85,10 +93,9 @@ function App() {
                 </>
               }
             />
-
             <Route
-              path='destination/:city/:cityCode'
-              element={<DestinationInformation dispatch={dispatch} />}
+              path='destination/:city/:cityCode/:latitude/:longitude'
+              element={<DestinationInformation dispatch={dispatch} myCityCode={myCityCode}/>}
             />
           </Route>
         </Routes>
