@@ -1,3 +1,4 @@
+import { info } from 'autoprefixer';
 import CardInformation from './CardInformation';
 
 export default function DestinationCard({
@@ -6,6 +7,14 @@ export default function DestinationCard({
   loadingState,
 }) {
   const citiesArray = information?.data ?? [];
+  const airportsData = Object.keys(information?.included?.airports || {})[0];
+
+  function returnCountryName(countryCode) {
+    const regionNamesInEnglish = new Intl.DisplayNames(['en'], {
+      type: 'region',
+    });
+    return regionNamesInEnglish.of(`${countryCode}`);
+  }
 
   if (loadingState === true && keyword) {
     return (
@@ -47,18 +56,18 @@ export default function DestinationCard({
       </h1>
       {citiesArray.map((item, index) => {
         let city = item['name'];
-        let country = item['address']['countryName'];
-        const cityCode = citiesArray[index]?.address?.cityCode;
-        const latitude = citiesArray[index]?.geoCode?.latitude;
-        const longitude = citiesArray[index]?.geoCode?.longitude;
+        const cityCode = item?.iataCode ?? airportsData;
+        const country = returnCountryName(item?.address.countryCode);
+        const latitude = item?.geoCode?.latitude;
+        const longitude = item?.geoCode?.longitude;
         return (
           <CardInformation
             city={city}
-            country={country}
             key={index}
             cityCode={cityCode}
             latitude={latitude}
             longitude={longitude}
+            country={country}
           />
         );
       })}
