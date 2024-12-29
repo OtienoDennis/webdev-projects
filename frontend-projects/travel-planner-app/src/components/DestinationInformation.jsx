@@ -1,5 +1,4 @@
 import useFetchDataApi from '../fetchingFunctions/useFetchDataApi';
-// import useFetchMyCityCode from '../fetchingFunctions/useFetchMyCityCode';
 import usefetchWeatherForecast from '../fetchingFunctions/usefetchWeatherForecast';
 import { useParams } from 'react-router-dom';
 import ErrorComponent from './ErrorComponent';
@@ -68,15 +67,23 @@ export default function DestinationInformation({ dispatch, myCityCode }) {
   );
 
   if (loading) {
-    return <p>Loading weather data...</p>;
+    return (
+      <p className='text-2xl text-white font-extrabold text-center'>
+        Loading weather data...
+      </p>
+    );
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <ErrorComponent errortext={error} />;
   }
 
   if (!formattedWeatherData) {
-    return <p>No weather data available.</p>;
+    return (
+      <p className='text-2xl text-white font-extrabold text-center'>
+        No weather data available.
+      </p>
+    );
   }
 
   console.log('Hotel Data:', hotelData);
@@ -84,12 +91,10 @@ export default function DestinationInformation({ dispatch, myCityCode }) {
   console.log('Attractions Data:', attractionsSiteData);
   console.log('Weather Data:', formattedWeatherData);
 
-  // Early return based on validation
   if (!isValidParameters) {
     return <ErrorComponent errortext='Invalid parameters provided.' />;
   }
 
-  // Loading state handling
   if (hotelLoading || flightLoading || attractionsSiteLoading) {
     return (
       <h1 className='text-2xl text-white font-extrabold text-center'>
@@ -98,7 +103,6 @@ export default function DestinationInformation({ dispatch, myCityCode }) {
     );
   }
 
-  // Error handling
   if (hotelError || flightError || attractionSiteError) {
     return (
       <ErrorComponent
