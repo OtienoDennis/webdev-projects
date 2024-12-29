@@ -1,45 +1,14 @@
 import { useState, useEffect } from 'react';
 import getAccessToken from './getAccessToken';
+import useGetMyLocation from './useGetMyLocation';
 
 export default function useFetchMyCityCode() {
-  const [location, setLocation] = useState({
-    latitude: null,
-    longitude: null,
-    error: null,
-  });
-
   const [myCityCode, setMyCityCode] = useState(null);
-
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            error: null,
-          });
-        },
-        (error) => {
-          setLocation({
-            latitude: null,
-            longitude: null,
-            error: error.message,
-          });
-        }
-      );
-    } else {
-      setLocation({
-        latitude: null,
-        longitude: null,
-        error: 'Geolocation is not supported by this browser',
-      });
-    }
-  };
+  const { location } = useGetMyLocation();
 
   useEffect(function () {
+    if (!location || !location.latitude || !location.longitude) return;
     async function fetchMyLocation() {
-      if (!location.latitude || !location.longitude) return;
       try {
         const token = await getAccessToken();
         const response = await fetch(
@@ -54,14 +23,17 @@ export default function useFetchMyCityCode() {
           throw new Error('Failed to fetch Destination data');
         }
         const result = await response.json();
-        setMyCityCode(result.data[0].address.cityCode);
-        console.log(result);
+        if (result?.data?.length > 0) {
+          setMyCityCode(result.data[0].address.cityCode);
+        } else {
+          console.warn('No city code found for the given coordinates');
+        }
+        console.log(result)
       } catch (error) {
         console.error('Error recieved', error.message);
       }
     }
-    getLocation();
     fetchMyLocation();
-  });
+  },[location]);
   return myCityCode;
 }
