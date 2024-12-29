@@ -1,25 +1,37 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const apiKey = 'c4d3be2ad65f981855965239aa5b3a12';
 
 export default function useFetchWeatherForecast(city, dispatch) {
-  const URLWEATHER = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+  const [formattedWeatherData, setFormattedWeatherData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
-        const response = await fetch(URLWEATHER);
-        if (response.status !== 200) {
+        setLoading(true);
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+        );
+        if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
         const responseData = await response.json();
-        let formattedData = convertWeatherData(responseData);
-        dispatch({ type: 'weatherData', payload: formattedData });
+        const convertedData = convertWeatherData(responseData);
+        setFormattedWeatherData(convertedData);
+        dispatch({ type: 'weatherData', payload: convertedData });
       } catch (error) {
+        setError(error.message);
         console.error(error.message);
+      } finally {
+        setLoading(false);
       }
     };
-    fetchWeatherData();
-  }, [city, dispatch, URLWEATHER]);
+    if (city) {
+      fetchWeatherData();
+    }
+  }, [city, dispatch]);
+  return {formattedWeatherData, loading, error};
 }
 
 function convertWeatherData(data) {

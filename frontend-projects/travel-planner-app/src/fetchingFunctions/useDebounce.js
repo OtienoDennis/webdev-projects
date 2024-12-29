@@ -9,5 +9,5 @@ export function useDebounce(value, delay) {
     return () => clearTimeout(timer);
   }, [value, delay]);
 
-  return debouncedValue.toUpperCase();
+  return debouncedValue;
 }

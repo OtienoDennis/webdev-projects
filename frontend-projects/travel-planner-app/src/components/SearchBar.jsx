@@ -2,7 +2,8 @@ import { useState } from 'react';
 
 export default function SearchBar({ dispatch }) {
   const [keyword, setKeyWord] = useState('');
-  
+  const [city, setCity] = useState('');
+
   function handleSubmit(e) {
     e.preventDefault();
     if (keyword.trim().length < 3) {
@@ -10,8 +11,10 @@ export default function SearchBar({ dispatch }) {
       return;
     }
     dispatch({ type: 'search', payload: keyword });
+    dispatch({ type: 'setCurrentCity', payload: city });
     dispatch({ type: 'setLoadingState', payload: true });
     setKeyWord('');
+    setCity('');
   }
 
   return (
@@ -23,7 +26,15 @@ export default function SearchBar({ dispatch }) {
       </button>
       <input
         type='text'
-        placeholder='Enter text to search!'
+        placeholder='Your Current City!'
+        className='p-2 rounded-md outline-none'
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+      />
+
+      <input
+        type='text'
+        placeholder='Where are you Visiting!'
         className='p-2 rounded-md outline-none'
         value={keyword}
         onChange={(e) => setKeyWord(e.target.value)}

@@ -5,9 +5,7 @@ import { useParams } from 'react-router-dom';
 import ErrorComponent from './ErrorComponent';
 
 export default function DestinationInformation({ dispatch, myCityCode }) {
-  console.log(myCityCode);
   const { city, cityCode, latitude, longitude } = useParams();
-  // const myCityCode = useFetchMyCityCode();
   const date = new Date().toISOString().split('T')[0];
 
   const isValidParameters = city && cityCode && latitude && longitude;
@@ -64,12 +62,27 @@ export default function DestinationInformation({ dispatch, myCityCode }) {
   );
 
   // FETCHING WEATHER FORECAST
-  usefetchWeatherForecast(isValidParameters ? city : '', dispatch);
+  const { formattedWeatherData, loading, error } = usefetchWeatherForecast(
+    isValidParameters ? city : '',
+    dispatch
+  );
+
+  if (loading) {
+    return <p>Loading weather data...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  if (!formattedWeatherData) {
+    return <p>No weather data available.</p>;
+  }
 
   console.log('Hotel Data:', hotelData);
   console.log('Flight Data:', flightData);
   console.log('Attractions Data:', attractionsSiteData);
-  // console.log('Weather Data:', weatherData);
+  console.log('Weather Data:', formattedWeatherData);
 
   // Early return based on validation
   if (!isValidParameters) {
