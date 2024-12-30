@@ -35,7 +35,7 @@ The **Travel Planner App** is a frontend application built with **React** to hel
    ```
 5. Open the app in your browser:
    ```
-   http://localhost:3000
+   http://localhost:5173
    ```
 
 ## 🧠 Challenges Faced
@@ -59,7 +59,7 @@ Contributions are welcome! Feel free to fork the repository and submit a pull re
 ## 📬 Contact
 For any queries or suggestions, reach out via:
 - **Email:** dennisotieno.dev@gmail.com
-- **GitHub:** [Your GitHub Profile](https://github.com/OtienoDennis)
+- **GitHub:** [Dennis Otieno](https://github.com/OtienoDennis)
 
 ---
 **Happy Traveling! 🌍✈️**
