@@ -1,4 +1,4 @@
-import { info } from 'autoprefixer';
+
 import CardInformation from './CardInformation';
 
 export default function DestinationCard({
