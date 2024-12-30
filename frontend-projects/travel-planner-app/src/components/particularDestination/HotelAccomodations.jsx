@@ -1,21 +1,44 @@
+import { useState } from 'react';
 import useFetchDataApi from '../../fetchingFunctions/useFetchDataApi';
 import ErrorComponent from '../ErrorComponent';
+import Hotel from './hotelModal/Hotel';
+import MiniHotelInformation from './hotelModal/MiniHotelInformation';
 
-export default function HotelAccomodations(cityCode, dispatch) {
+export default function HotelAccomodations({ cityCode, dispatch, city }) {
+  const [oneHotelId, setOneHotelId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const isValidParameters = cityCode;
-  const URLHOTELOFFERS = `https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=`;
 
-  // FETCHING HOTEL OFFERS
+  const URLCITYHOTEL = `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${cityCode}&radius=13&radiusUnit=KM&`;
+
+  function getHotelDetails(data) {
+    if (!data?.data) return [];
+    return data.data.slice(0, 12).map((hotel) => ({
+      hotelName: hotel.name,
+      hotelId: hotel.hotelId,
+      distance: hotel.distance.value,
+    }));
+  }
+
+  // FETCH HOTELS IN CURRENT CITY
   const {
-    data: hotelData,
-    error: hotelError,
-    loading: hotelLoading,
+    data: cityHotel,
+    error: cityHotelError,
+    loading: cityHotelLoading,
   } = useFetchDataApi(
-    URLHOTELOFFERS,
-    isValidParameters ? cityCode : '',
+    URLCITYHOTEL,
+    isValidParameters ? 'hotelSource=ALL' : null,
     dispatch,
     {
-      dataActionType: 'hotelOffers',
+      dataActionType: 'hotelsInCity',
       loadingActionType: 'setLoadingState',
     }
   );
@@ -24,7 +47,7 @@ export default function HotelAccomodations(cityCode, dispatch) {
     return <ErrorComponent errortext='Invalid parameters provided.' />;
   }
 
-  if (hotelLoading) {
+  if (cityHotelLoading) {
     return (
       <h1 className='text-2xl text-white font-extrabold text-center'>
         Loading...
@@ -32,32 +55,50 @@ export default function HotelAccomodations(cityCode, dispatch) {
     );
   }
 
-  if (hotelError) {
-    return <ErrorComponent errortext={hotelError} />;
+  if (cityHotelError) {
+    return <ErrorComponent errortext={cityHotelError} />;
   }
+
+  if (cityHotel?.data?.length === 0) {
+    return (
+      <ErrorComponent
+        errortext={'No Hotel Data to this Destination Available'}
+      />
+    );
+  }
+
+  let hotelData = cityHotel?.data ? getHotelDetails(cityHotel) : [];
   return (
-    <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2'>
+    <div className='border-slate-300 border-2 rounded-md p-5 bg-slate-400'>
       <h3 className='text-center font-extrabold underline text-2xl'>
-        Hotel Accomodations
+        Hotel Accomodations in{' '}
+        <span className='text-gray-950 bg-amber-200 py-1 px-2 rounded text-lg'>
+          {city}
+        </span>{' '}
+        city!
       </h3>
-      <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 '>
-        <ul className='flex justify-between '>
-          <li className='text-md font-extrabold'>One</li>
-          <li className='text-md font-extrabold'>num</li>
-        </ul>
-        <ul className='flex justify-between '>
-          <li className='text-md font-extrabold'>One</li>
-          <li className='text-md font-extrabold'>num</li>
-        </ul>
-        <ul className='flex justify-between '>
-          <li className='text-md font-extrabold'>One</li>
-          <li className='text-md font-extrabold'>num</li>
-        </ul>
-        <ul className='flex justify-between '>
-          <li className='text-md font-extrabold'>One</li>
-          <li className='text-md font-extrabold'>num</li>
-        </ul>
-      </div>
+
+      {hotelData.map((hotel) => {
+        return (
+          <Hotel
+            key={hotel.hotelId}
+            hotelName={hotel.hotelName}
+            hotelId={hotel.hotelId}
+            distance={hotel.distance}
+            city={city}
+            setOneHotelId={setOneHotelId}
+            openModal={openModal}
+          />
+        );
+      })}
+      {isModalOpen && (
+        <MiniHotelInformation
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          oneHotelId={oneHotelId}
+          dispatch={dispatch}
+        />
+      )}
     </div>
   );
 }
