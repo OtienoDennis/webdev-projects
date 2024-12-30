@@ -8,13 +8,19 @@ export default function DestinationInformation({ dispatch, myCityCode }) {
   const { city, cityCode, latitude, longitude } = useParams();
 
   return (
-    <div className='rounded-lg p-3 my-3 bg-slate-500 shadow-lg shadow-white'>
+    <div className='rounded-lg p-3 my-3 bg-slate-500 shadow-lg shadow-white '>
       <FlightOffers
         cityCode={cityCode}
         dispatch={dispatch}
         myCityCode={myCityCode}
       />
-      <HotelAccomodations cityCode={cityCode} dispatch={dispatch} />
+      <HotelAccomodations
+        cityCode={cityCode}
+        dispatch={dispatch}
+        city={city}
+        latitude={latitude}
+        longitude={longitude}
+      />
       <TopAttractions
         dispatch={dispatch}
         latitude={latitude}
