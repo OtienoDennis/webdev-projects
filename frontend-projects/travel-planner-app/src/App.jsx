@@ -7,11 +7,11 @@ import useFetchDataApi from './fetchingFunctions/useFetchDataApi';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import useFetchMyCityCode from './fetchingFunctions/useFetchMyCityCode';
-import { use } from 'react';
 
 const initialState = {
   destinationInformation: [],
   hotelInformation: [],
+  hotelsInCity: [],
   flightInformation: [],
   weatherInformation: [],
   topAttractionsInformation: [],
@@ -45,6 +45,11 @@ function reducer(state, action) {
       return {
         ...state,
         weatherInformation: action.payload,
+      };
+    case 'hotelsInCity':
+      return {
+        ...state,
+        hotelsInCity: action.payload,
       };
     case 'search':
       return {
@@ -80,6 +85,7 @@ function App() {
     dataActionType: 'destinationData',
     loadingActionType: 'setLoadingState',
   });
+  
 
   return (
     <div className='w-[calc(100vw-40px)] h-[calc(100vh-40px)] bg-sky-400 mx-auto my-5 rounded-md flex flex-col items-center gap-5 overflow-y-auto'>
