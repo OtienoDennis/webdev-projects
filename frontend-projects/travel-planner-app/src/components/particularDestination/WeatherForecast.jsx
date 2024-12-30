@@ -30,7 +30,7 @@ export default function WeatherForecast({ city, dispatch }) {
     );
   }
   return (
-    <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 mb-4'>
+    <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 mt-4 mb-4'>
       <h3 className='text-center font-extrabold underline text-2xl'>
         Weather Forecast
       </h3>
