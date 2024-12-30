@@ -22,6 +22,7 @@ export default function useFetchMyCityCode(myCity) {
             throw new Error('Failed to fetch Destination data');
           }
           const result = await response.json();
+          console.log(result);
           if (result?.data?.length > 0) {
             setMyIataCityCode(
               result?.data[0]?.iataCode ?? Object.keys(result?.included?.airports || {})[0]

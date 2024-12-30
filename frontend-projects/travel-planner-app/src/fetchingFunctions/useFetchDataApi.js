@@ -9,7 +9,9 @@ export default function useFetchDataApi(URL, keyword, dispatch, options = {}) {
   const [loading, setLoading] = useState(false);
 
   const fetchData = useCallback(async () => {
-    if (!URL || !keyword || keyword.trim().length < 3) return;
+    if (!URL || typeof keyword !== 'string' || keyword.trim().length < 3) {
+      return;
+    }
 
     setLoading(true);
     setError(null);
@@ -19,6 +21,7 @@ export default function useFetchDataApi(URL, keyword, dispatch, options = {}) {
     }
 
     try {
+      console.log(`${URL}${keyword}`);
       const token = await getAccessToken();
       const response = await fetch(`${URL}${keyword}`, {
         headers: {
@@ -27,7 +30,7 @@ export default function useFetchDataApi(URL, keyword, dispatch, options = {}) {
       });
 
       if (!response.ok) {
-        throw new Error('Request failed with status code: ' + response.status);
+        throw new Error('Request failed !! ');
       }
       const result = await response.json();
       setData(result);
@@ -36,8 +39,8 @@ export default function useFetchDataApi(URL, keyword, dispatch, options = {}) {
       }
       console.log(result);
     } catch (error) {
-      setError(error?.message || 'An error occured');
-      console.error('Fetch Error:', error?.message || error);
+      setError('An error occured!');
+      console.error('Error:', error?.message || error);
     } finally {
       setLoading(false);
       if (dispatch && loadingActionType) {

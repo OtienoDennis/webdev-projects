@@ -21,7 +21,7 @@ export default function useFetchWeatherForecast(city, dispatch) {
         setFormattedWeatherData(convertedData);
         dispatch({ type: 'weatherData', payload: convertedData });
       } catch (error) {
-        setError(error.message);
+        setError(error.message = "No weather data available.");
         console.error("Weather API:", error.message);
       } finally {
         setLoading(false);
