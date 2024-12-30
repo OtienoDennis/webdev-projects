@@ -13,7 +13,7 @@ export default function Hotel({
         setOneHotelId(hotelId);
         openModal();
       }}>
-      <ul className='flex justify-between gap-16 hover:font-extrabold hover:cursor-pointer transition ease-in-out duration-[25]'>
+      <ul className='flex justify-between gap-16 hover:font-extrabold hover:cursor-pointer transition ease-in-out duration-200'>
         <li className='text-md'>{hotelName}</li>
         <li className='text-md'>{`${distance} KM FROM ${city} city.`}</li>
       </ul>
