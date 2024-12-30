@@ -43,25 +43,25 @@ export default function TopAttractions({ latitude, longitude, dispatch }) {
 
   return (
     <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2'>
-      <h3 className='text-center text-gray-200 font-extrabold underline'>
+      <h3 className='text-center font-extrabold underline text-2xl'>
         Top Attractions
       </h3>
       <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 '>
         <ul className='flex justify-between '>
-          <li className='text-sm font-semibold text-gray-300'>One</li>
-          <li className='text-sm font-semibold text-gray-300'>num</li>
+          <li className='text-md font-extrabold'>One</li>
+          <li className='text-md font-extrabold'>num</li>
         </ul>
         <ul className='flex justify-between '>
-          <li className='text-sm font-semibold text-gray-300'>One</li>
-          <li className='text-sm font-semibold text-gray-300'>num</li>
+          <li className='text-md font-extrabold'>One</li>
+          <li className='text-md font-extrabold'>num</li>
         </ul>
         <ul className='flex justify-between '>
-          <li className='text-sm font-semibold text-gray-300'>One</li>
-          <li className='text-sm font-semibold text-gray-300'>num</li>
+          <li className='text-md font-extrabold'>One</li>
+          <li className='text-md font-extrabold'>num</li>
         </ul>
         <ul className='flex justify-between '>
-          <li className='text-sm font-semibold text-gray-300'>One</li>
-          <li className='text-sm font-semibold text-gray-300'>num</li>
+          <li className='text-md font-extrabold'>One</li>
+          <li className='text-md font-extrabold'>num</li>
         </ul>
       </div>
     </div>
