@@ -1,4 +1,3 @@
-
 import CardInformation from './CardInformation';
 
 export default function DestinationCard({
@@ -32,7 +31,7 @@ export default function DestinationCard({
 
   if (citiesArray.length < 1 && keyword && loadingState === false) {
     return (
-      <div>
+      <div className='flex justify-center items-center min-h-[200px]'>
         <h1 className='text-2xl text-white font-extrabold text-center'>
           No information about{' '}
           <span className='text-gray-950 bg-red-500 py-1 px-2 rounded text-lg'>
@@ -44,7 +43,7 @@ export default function DestinationCard({
     );
   }
 
-  if (citiesArray.length < 1) return;
+  if (citiesArray.length < 1) return null;
 
   return (
     <div className='mb-5'>
@@ -61,14 +60,17 @@ export default function DestinationCard({
         const latitude = item?.geoCode?.latitude;
         const longitude = item?.geoCode?.longitude;
         return (
-          <CardInformation
-            city={city}
+          <div
             key={index}
-            cityCode={cityCode}
-            latitude={latitude}
-            longitude={longitude}
-            country={country}
-          />
+            className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
+            <CardInformation
+              city={city}
+              cityCode={cityCode}
+              latitude={latitude}
+              longitude={longitude}
+              country={country}
+            />
+          </div>
         );
       })}
     </div>
