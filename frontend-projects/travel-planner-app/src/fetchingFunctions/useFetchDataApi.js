@@ -10,6 +10,7 @@ export default function useFetchDataApi(URL, keyword, dispatch, options = {}) {
 
   const fetchData = useCallback(async () => {
     if (!URL || typeof keyword !== 'string' || keyword.trim().length < 3) {
+      setError('Invalid keyword');
       return;
     }
 
@@ -39,8 +40,9 @@ export default function useFetchDataApi(URL, keyword, dispatch, options = {}) {
       }
       console.log(result);
     } catch (error) {
-      setError('An error occured!');
+      setError(error.message);
       console.error('Error:', error?.message || error);
+      console.log(error);
     } finally {
       setLoading(false);
       if (dispatch && loadingActionType) {
@@ -58,6 +60,5 @@ export default function useFetchDataApi(URL, keyword, dispatch, options = {}) {
       isMounted = false;
     };
   }, [fetchData]);
-
   return { data, error, loading };
 }
