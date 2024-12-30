@@ -256,9 +256,9 @@ export default function TopAttractions({ latitude, longitude, dispatch }) {
     );
   }
 
-  if (attractionsSiteError) {
-    return <ErrorComponent errortext={attractionsSiteError} />;
-  }
+  // if (attractionsSiteError) {
+  //   return <ErrorComponent errortext={attractionsSiteError} />;
+  // }
 
   function getCategoryAndName(data) {
     return data.data.map((item) => ({
