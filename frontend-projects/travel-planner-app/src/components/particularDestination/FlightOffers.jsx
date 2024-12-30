@@ -64,7 +64,7 @@ export default function FlightOffers({ cityCode, dispatch, myCityCode }) {
     flightData?.data[0]?.travelerPricings[0]?.fareDetailsBySegment[1]?.cabin;
 
   return (
-    <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2'>
+    <div className='border-slate-300 border-2 rounded-md p-3 bg-slate-400 my-4'>
       <h3 className='text-center font-extrabold underline text-2xl'>
         Flight Offers
       </h3>

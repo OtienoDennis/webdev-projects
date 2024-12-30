@@ -21,7 +21,6 @@ export default function MiniHotelInformation({
       name = data?.data?.[0]?.hotel?.name;
       price = data?.data?.[0]?.offers?.[0]?.price.total;
       currency = data?.data?.[0]?.offers?.[0]?.price.currency;
-      
     } else {
       title = data?.warnings?.[0]?.title;
     }
@@ -53,9 +52,7 @@ export default function MiniHotelInformation({
     return <ErrorComponent errortext='Hotel ID is required.' />;
   }
 
-
   if (!isOpen) return null;
-
 
   const { available, name, price, currency, title } = hotelData ? (
     checkHotelAvailability(hotelData)

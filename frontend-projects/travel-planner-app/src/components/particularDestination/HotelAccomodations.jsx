@@ -69,7 +69,7 @@ export default function HotelAccomodations({ cityCode, dispatch, city }) {
 
   let hotelData = cityHotel?.data ? getHotelDetails(cityHotel) : [];
   return (
-    <div className='border-slate-300 border-2 rounded-md p-5 bg-slate-400'>
+    <div className='border-slate-300 border-2 rounded-md p-5 bg-slate-400 mb-4'>
       <h3 className='text-center font-extrabold underline text-2xl'>
         Hotel Accomodations in{' '}
         <span className='text-gray-950 bg-amber-200 py-1 px-2 rounded text-lg'>

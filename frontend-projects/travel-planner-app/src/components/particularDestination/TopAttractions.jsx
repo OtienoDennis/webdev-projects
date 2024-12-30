@@ -4,7 +4,7 @@ import ErrorComponent from '../ErrorComponent';
 export default function TopAttractions({ latitude, longitude, dispatch }) {
   const isValidParameters = latitude && longitude;
 
-  const URLTOPATTRACTIONS = `https://test.api.amadeus.com/v1/reference-data/locations/pois?latitude=${latitude}&longitude=`;
+  const URLTOPATTRACTIONS = `https://test.api.amadeus.com/v1/reference-data/locations/pois?latitude=${latitude}&longitude=${longitude}&radius=2&page%5Blimit%5D=10&`;
   const pointsOfInterest = {
     data: [
       {
@@ -236,7 +236,7 @@ export default function TopAttractions({ latitude, longitude, dispatch }) {
     loading: attractionsSiteLoading,
   } = useFetchDataApi(
     URLTOPATTRACTIONS,
-    isValidParameters ? longitude : '',
+    isValidParameters ? 'page%5Boffset%5D=0' : '',
     dispatch,
     {
       dataActionType: 'topAttractions',
@@ -244,49 +244,48 @@ export default function TopAttractions({ latitude, longitude, dispatch }) {
     }
   );
 
-   if (!isValidParameters) {
-      return <ErrorComponent errortext='Invalid parameters provided.' />;
-    }
-  
-    if (attractionsSiteLoading) {
-      return (
-        <h1 className='text-2xl text-white font-extrabold text-center'>
-          Loading...
-        </h1>
-      );
-    }
-  
-    if (attractionsSiteError) {
-      return (
-        <ErrorComponent
-          errortext={attractionsSiteError}
-        />
-      );
-    }
+  if (!isValidParameters) {
+    return <ErrorComponent errortext='Invalid parameters provided.' />;
+  }
+
+  if (attractionsSiteLoading) {
+    return (
+      <h1 className='text-2xl text-white font-extrabold text-center'>
+        Loading...
+      </h1>
+    );
+  }
+
+  // if (attractionsSiteError) {
+  //   return <ErrorComponent errortext={attractionsSiteError} />;
+  // }
+
+  function getCategoryAndName(data) {
+    return data.data.map((item) => ({
+      category: item?.category,
+      name: item?.name,
+    }));
+  }
+
+  const attractionsList = attractionsSiteData
+    ? getCategoryAndName(attractionsSiteData)
+    : getCategoryAndName(pointsOfInterest);
 
   return (
-    <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2'>
+    <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 mb-4'>
       <h3 className='text-center font-extrabold underline text-2xl'>
         Top Attractions
       </h3>
-      <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 '>
-        <ul className='flex justify-between '>
-          <li className='text-md font-extrabold'>One</li>
-          <li className='text-md font-extrabold'>num</li>
-        </ul>
-        <ul className='flex justify-between '>
-          <li className='text-md font-extrabold'>One</li>
-          <li className='text-md font-extrabold'>num</li>
-        </ul>
-        <ul className='flex justify-between '>
-          <li className='text-md font-extrabold'>One</li>
-          <li className='text-md font-extrabold'>num</li>
-        </ul>
-        <ul className='flex justify-between '>
-          <li className='text-md font-extrabold'>One</li>
-          <li className='text-md font-extrabold'>num</li>
-        </ul>
-      </div>
+      {attractionsList.map((obj, index) => {
+        return (
+          <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2' key={index}>
+            <ul className='flex justify-between '>
+              <li className='text-md font-extrabold'>{obj.name}</li>
+              <li className='text-md font-extrabold'>{obj.category}</li>
+            </ul>
+          </div>
+        );
+      })}
     </div>
   );
 }
