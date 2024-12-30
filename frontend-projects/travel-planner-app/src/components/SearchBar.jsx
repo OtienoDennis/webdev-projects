@@ -20,14 +20,14 @@ export default function SearchBar({ dispatch }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className='bg-[#bb8686] flex gap-4 p-5 rounded-md my-5'>
+      className='bg-[#bb8686] flex gap-4 p-5 rounded-md my-5 md:flex-row md:justify-between flex-col md:items-center w-11/12 m-auto'>
       <button className='text-white font-bold bg-black p-1 rounded-md hover:bg-slate-700'>
         SEARCH
       </button>
       <input
         type='text'
         placeholder='Your Current City!'
-        className='p-2 rounded-md outline-none'
+        className='p-2 rounded-md outline-none md:w-4/12'
         value={city}
         onChange={(e) => setCity(e.target.value)}
       />
