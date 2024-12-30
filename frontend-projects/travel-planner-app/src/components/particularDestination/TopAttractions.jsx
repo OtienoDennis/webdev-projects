@@ -278,10 +278,12 @@ export default function TopAttractions({ latitude, longitude, dispatch }) {
       </h3>
       {attractionsList.map((obj, index) => {
         return (
-          <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2' key={index}>
+          <div
+            className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 hover:font-extrabold hover:cursor-pointer transition ease-in-out duration-200'
+            key={index}>
             <ul className='flex justify-between '>
-              <li className='text-md font-extrabold'>{obj.name}</li>
-              <li className='text-md font-extrabold'>{obj.category}</li>
+              <li className='text-md'>{obj.name}</li>
+              <li className='text-md'>{obj.category}</li>
             </ul>
           </div>
         );
