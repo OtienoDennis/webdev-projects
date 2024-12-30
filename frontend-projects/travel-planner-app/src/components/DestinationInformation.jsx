@@ -8,7 +8,7 @@ export default function DestinationInformation({ dispatch, myCityCode }) {
   const { city, cityCode, latitude, longitude } = useParams();
 
   return (
-    <div className='rounded-lg py-4 px-8 my-3 bg-slate-500 shadow-lg shadow-white'>
+    <div className='rounded-lg py-4 px-2 my-3 bg-slate-500 shadow-lg shadow-white w-11/12 m-auto'>
       <FlightOffers
         cityCode={cityCode}
         dispatch={dispatch}
