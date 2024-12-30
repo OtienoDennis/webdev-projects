@@ -54,9 +54,11 @@ export default function FlightOffers({ cityCode, dispatch, myCityCode }) {
       'T'
     )[0];
   const departureTime =
-    flightData?.data?.[0]?.itineraries?.[0]?.segments?.[0]?.departure?.at.split(
-      'T'
-    )[1];
+    flightData?.data?.[0]?.itineraries?.[0]?.segments?.[0]?.departure?.at
+      .split('T')[1]
+      .split(':')
+      .slice(0, 2)
+      .join(':');
   const farePrice = flightData?.data?.[0]?.price?.total;
   const farePriceCurrency = flightData?.data?.[0]?.price?.currency;
   const availableSeats = flightData?.data?.[0]?.numberOfBookableSeats;
@@ -64,36 +66,36 @@ export default function FlightOffers({ cityCode, dispatch, myCityCode }) {
     flightData?.data[0]?.travelerPricings[0]?.fareDetailsBySegment[1]?.cabin;
 
   return (
-    <div className='border-slate-300 border-2 rounded-md p-3 bg-slate-400 my-4'>
+    <div className='border-slate-300 border-2 rounded-md p-3 bg-slate-400 my-4 m-auto'>
       <h3 className='text-center font-extrabold underline text-2xl'>
         Flight Offers
       </h3>
       <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 '>
-        <ul className='flex justify-between gap-28'>
-          <li className='text-md font-extrabold'>Departure Date:</li>
-          <li className='text-2xl font-extrabold text-[#ACE1AF]'>
+        <ul className='flex justify-between '>
+          <li className='text-sm font-extrabold'>Departure Date:</li>
+          <li className='text-xs sm:text-xl md:text-2xl font-extrabold text-[#ACE1AF]'>
             {departureDate}
           </li>
         </ul>
-        <ul className='flex justify-between gap-28'>
-          <li className='text-md font-extrabold'>Departure Time:</li>
-          <li className='text-2xl font-extrabold text-[#ACE1AF]'>
+        <ul className='flex justify-between '>
+          <li className='text-sm font-extrabold'>Departure Time:</li>
+          <li className='text-xs sm:text-xl md:text-2xl font-extrabold text-[#ACE1AF]'>
             {departureTime}
           </li>
         </ul>
         <ul className='flex justify-between '>
-          <li className='text-md font-extrabold'>Air Fare:</li>
-          <li className='text-2xl font-extrabold text-[#ACE1AF]'>{`${farePrice} ${farePriceCurrency}`}</li>
+          <li className='text-sm font-extrabold'>Air Fare:</li>
+          <li className='text-xs sm:text-xl md:text-2xl font-extrabold text-[#ACE1AF]'>{`${farePrice} ${farePriceCurrency}`}</li>
         </ul>
         <ul className='flex justify-between '>
-          <li className='text-md font-extrabold'>Available Seats:</li>
-          <li className='text-2xl font-extrabold text-[#ACE1AF]'>
+          <li className='text-sm font-extrabold'>Available Seats:</li>
+          <li className='text-xs sm:text-xl md:text-2xl font-extrabold text-[#ACE1AF]'>
             {availableSeats} SEATS
           </li>
         </ul>
         <ul className='flex justify-between '>
-          <li className='text-md font-extrabold'>Class:</li>
-          <li className='text-2xl font-extrabold text-[#ACE1AF]'>
+          <li className='text-sm font-extrabold'>Class:</li>
+          <li className='text-xs sm:text-xl md:text-2xl font-extrabold text-[#ACE1AF]'>
             {classSeats}
           </li>
         </ul>
