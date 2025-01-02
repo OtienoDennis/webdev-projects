@@ -272,8 +272,8 @@ export default function TopAttractions({ latitude, longitude, dispatch }) {
     : getCategoryAndName(pointsOfInterest);
 
   return (
-    <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 mb-4'>
-      <h3 className='text-center font-extrabold underline text-2xl'>
+    <div className='border-slate-300 border-2 rounded-md bg-slate-400 overflow-y-auto relative px-2'>
+      <h3 className='text-center font-extrabold underline text-2xl sticky bg-white p-4 top-1 rounded-md'>
         Top Attractions
       </h3>
       {attractionsList.map((obj, index) => {
