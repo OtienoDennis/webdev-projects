@@ -10,7 +10,7 @@ import useFetchMyCityCode from './fetchingFunctions/useFetchMyCityCode';
 import ItineraryPlanner from './components/ItineraryPlanner';
 
 const initialState = {
-  itineraryInformation: [
+  itineraryInformation: 
     {
       city: 'Barcelona',
       flightTime: '19:00',
@@ -20,7 +20,7 @@ const initialState = {
       hotelName: 'Hotel',
       attractionToVisit: 'Museum',
     }
-  ],
+  ,
   destinationInformation: [],
   hotelInformation: [],
   hotelsInCity: [],
