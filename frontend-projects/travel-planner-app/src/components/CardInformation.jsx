@@ -9,7 +9,7 @@ export default function CardInformation({
 }) {
   return (
     <Link to={`/destination/${city}/${cityCode}/${latitude}/${longitude}`}>
-      <div className='flex sm:flex-row justify-between items-center mt-3 bg-slate-400 p-3 sm:p-4 rounded hover:scale-105 hover:cursor-pointer transition ease-in-out duration-200 w-11/12 m-auto'>
+      <div className='flex flex-row justify-between gap-5 mt-3 bg-slate-400 p-3 rounded hover:scale-105 hover:cursor-pointer transition ease-in-out duration-200'>
         <p className='text-white text-sm sm:text-base md:text-lg font-medium'>
           {city}
         </p>
