@@ -272,14 +272,14 @@ export default function TopAttractions({ latitude, longitude, dispatch }) {
     : getCategoryAndName(pointsOfInterest);
 
   return (
-    <div className='border-slate-300 border-2 rounded-md bg-slate-400 overflow-y-auto relative px-2'>
-      <h3 className='text-center font-extrabold underline text-2xl sticky bg-white p-4 top-1 rounded-md'>
+    <div className='border-slate-300 border-2 rounded-md bg-slate-400 overflow-y-auto relative px-2 bg-opacity-60'>
+      <h3 className='text-center font-extrabold underline text-2xl sticky  p-4 top-1 rounded-md bg-[#708090] bg-opacity-40 text-white'>
         Top Attractions
       </h3>
       {attractionsList.map((obj, index) => {
         return (
           <div
-            className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 hover:font-extrabold hover:cursor-pointer transition ease-in-out duration-200'
+            className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 hover:font-extrabold hover:cursor-pointer transition ease-in-out duration-200 bg-opacity-50'
             key={index}>
             <ul className='flex justify-between '>
               <li className='text-md'>{obj.name}</li>
