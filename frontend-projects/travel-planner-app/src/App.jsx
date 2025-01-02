@@ -85,10 +85,9 @@ function App() {
     dataActionType: 'destinationData',
     loadingActionType: 'setLoadingState',
   });
-  
 
   return (
-    <div className='w-[calc(100vw-40px)] h-[calc(100vh-40px)] bg-sky-400 mx-auto my-5 rounded-md flex flex-col items-center gap-5 overflow-y-auto '>
+    <div className='w-[calc(100vw-40px)] h-[calc(100vh-40px)] bg-sky-400 mx-auto my-5 rounded-md flex flex-col items-center gap-5 overflow-y-auto align'>
       <Router>
         <Routes>
           <Route path='/' element={<Layout />}>
