@@ -8,7 +8,7 @@ export default function Hotel({
 }) {
   return (
     <div
-      className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-3'
+      className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-3 bg-opacity-50'
       onClick={() => {
         setOneHotelId(hotelId);
         openModal();
