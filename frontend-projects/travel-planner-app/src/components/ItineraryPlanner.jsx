@@ -9,18 +9,18 @@ export default function ItineraryPlanner({
   return (
     <div className='flex flex-col items-center gap-5'>
       <h1 className='text-white text-5xl font-extrabold p-5 text-center'>
-        Visit to {itineraryInformation?.[0].city} City!
+        Visit to {itineraryInformation?.city} City!
       </h1>
-      <div className='text-center text-white text-3xl p-5 border-2 border-white rounded-md bg-slate-400 bg-opacity-50'>
-        <p>FlightDate: {itineraryInformation?.[0].flightDate}</p>
-        <p>Flight Time: {itineraryInformation?.[0].flightTime} hrs</p>
+      <div className='text-center text-white text-3xl p-5 border-2 border-white rounded-md bg-slate-400 bg-opacity-50 font-semibold'>
+        <p>FlightDate: {itineraryInformation?.flightDate}</p>
+        <p>Flight Time: {itineraryInformation?.flightTime} hrs</p>
         <p>
-          Air Fare: {itineraryInformation?.[0].airFare}{' '}
-          {itineraryInformation?.[0].currency}
+          Air Fare: {itineraryInformation?.airFare}{' '}
+          {itineraryInformation?.currency}
         </p>
         <p>
-          Explore {itineraryInformation?.[0].attractionToVisit} in{' '}
-          {itineraryInformation?.[0].city} city!
+          Explore {itineraryInformation?.attractionToVisit} in{' '}
+          {itineraryInformation?.city} city!
         </p>
       </div>
       <div className='gap-5 mt-5 flex'>
