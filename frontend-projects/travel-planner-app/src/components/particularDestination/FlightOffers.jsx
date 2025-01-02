@@ -66,8 +66,8 @@ export default function FlightOffers({ cityCode, dispatch, myCityCode }) {
     flightData?.data[0]?.travelerPricings[0]?.fareDetailsBySegment[1]?.cabin;
 
   return (
-    <div className='border-slate-300 border-2 rounded-md px-3 bg-slate-400 m-auto relative overflow-y-auto'>
-      <h3 className='text-center font-extrabold underline text-2xl sticky bg-white p-4 top-1 rounded-md mt-1'>
+    <div className='border-slate-300 border-2 rounded-md px-3 bg-slate-400 m-auto relative overflow-y-auto bg-opacity-60'>
+      <h3 className='text-center font-extrabold underline text-2xl sticky text-white p-4 top-1 rounded-md mt-1 bg-[#708090] bg-opacity-40'>
         Flight Offers
       </h3>
       {flightData?.data?.map((item, index) => {
@@ -87,7 +87,7 @@ export default function FlightOffers({ cityCode, dispatch, myCityCode }) {
 
         return (
           <div key={index}>
-            <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 '>
+            <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 bg-opacity-50'>
               <ul className='flex justify-between '>
                 <li className='text-sm font-extrabold'>Departure Date:</li>
                 <li className='text-xs sm:text-xl md:text-2xl font-extrabold text-[#ACE1AF]'>
