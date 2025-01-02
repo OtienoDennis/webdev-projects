@@ -9,6 +9,15 @@ import Layout from './components/Layout';
 import useFetchMyCityCode from './fetchingFunctions/useFetchMyCityCode';
 
 const initialState = {
+  itineraryInformation: [
+    {
+      flightTime: '1900',
+      flightDate: '2025-01-03',
+      airFare: 0,
+      hotelName: 'Hotel',
+      attractionToVisit: 'Museum',
+    }
+  ],
   destinationInformation: [],
   hotelInformation: [],
   hotelsInCity: [],
@@ -21,6 +30,12 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'itineraryInformation':
+      return {
+        ...state,
+        itineraryInformation: action.payload,
+      };
+
     case 'destinationData':
       return {
         ...state,
@@ -87,7 +102,8 @@ function App() {
   });
 
   return (
-    <div className='w-[calc(100vw-40px)] h-[calc(100vh-40px)] bg-sky-400 mx-auto my-5 rounded-md flex flex-col items-center gap-5 overflow-y-auto align'>
+    <div
+      className={`w-[calc(100vw-40px)] h-[calc(100vh-40px)] bg-[url('/bg-photo.webp')] bg-cover bg-center mx-auto my-5 rounded-md flex flex-col items-center gap-5 overflow-y-auto align`}>
       <Router>
         <Routes>
           <Route path='/' element={<Layout />}>
