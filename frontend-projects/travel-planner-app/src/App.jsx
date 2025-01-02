@@ -7,13 +7,16 @@ import useFetchDataApi from './fetchingFunctions/useFetchDataApi';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import useFetchMyCityCode from './fetchingFunctions/useFetchMyCityCode';
+import ItineraryPlanner from './components/ItineraryPlanner';
 
 const initialState = {
   itineraryInformation: [
     {
-      flightTime: '1900',
+      city: 'Barcelona',
+      flightTime: '19:00',
       flightDate: '2025-01-03',
-      airFare: 0,
+      airFare: 500,
+      currency: 'USD',
       hotelName: 'Hotel',
       attractionToVisit: 'Museum',
     }
@@ -90,8 +93,16 @@ function reducer(state, action) {
 const URLDESTINATION = `https://test.api.amadeus.com/v1/reference-data/locations/cities?include=AIRPORTS&keyword=`;
 
 function App() {
-  const [{ destinationInformation, keyword, loadingState, city }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    {
+      destinationInformation,
+      keyword,
+      loadingState,
+      city,
+      itineraryInformation,
+    },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
   const myCityCode = useFetchMyCityCode(useDebounce(city, 1000));
 
@@ -128,6 +139,20 @@ function App() {
                   dispatch={dispatch}
                   myCityCode={myCityCode}
                 />
+              }
+            />
+            <Route
+              path='itinerary'
+              element={
+                <ItineraryPlanner itineraryInformation={itineraryInformation} />
+              }
+            />
+            <Route
+              path='*'
+              element={
+                <h1 className='text-center text-white text-6xl font-extrabold mt-10'>
+                  Page not found!
+                </h1>
               }
             />
           </Route>
