@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function ItineraryModal({
   valuesToEdit,
@@ -17,6 +17,20 @@ export default function ItineraryModal({
     attractionToVisit: valuesToEdit?.attractionToVisit || '',
   });
   const [errors, setErrors] = useState({});
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        setIsModalOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [setIsModalOpen]);
 
   const validate = () => {
     const newErrors = {};
@@ -56,6 +70,7 @@ export default function ItineraryModal({
     <div className='relative h-screen bg-gray-200'>
       <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'>
         <form
+        ref={modalRef}
           onSubmit={handleSubmit}
           className='bg-slate-800 bg-opacity-70 w-72 md:w-1/3 p-4 rounded-xl '>
           <div className='flex justify-between my-2 text-xl'>
