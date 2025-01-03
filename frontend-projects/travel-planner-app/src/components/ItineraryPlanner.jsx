@@ -43,7 +43,7 @@ export default function ItineraryPlanner({ itineraryInformation, dispatch }) {
       <div className='flex flex-col items-center h-screen gap-10 mt-5'>
         <div className=''>
           <Link to='/'>
-            <p className='text-white font-extrabold text-center text-xl bg-amber-500 p-2 rounded md:text-2xl hover:bg-opacity-90 hover:cursor-pointer active:scale-95 transition ease-in-out duration-200 w-max m-auto'>
+            <p className='text-white font-extrabold text-center bg-amber-500 p-1 md:p-2 rounded md:text-2xl hover:bg-opacity-90 hover:cursor-pointer active:scale-95 transition ease-in-out duration-200 w-11/12 m-auto md:wmax break-words'>
               SEARCH FOR A DESTINATION TO CREATE ITINERARY
             </p>
           </Link>
