@@ -1,7 +1,12 @@
 import useFetchDataApi from '../../fetchingFunctions/useFetchDataApi';
 import ErrorComponent from '../ErrorComponent';
 
-export default function FlightOffers({ cityCode, dispatch, myCityCode }) {
+export default function FlightOffers({
+  cityCode,
+  dispatch,
+  myCityCode,
+  setItineraryData,
+}) {
   const isValidParameters = cityCode && myCityCode;
 
   const date = new Date(new Date().setDate(new Date().getDate() + 1))
@@ -10,6 +15,24 @@ export default function FlightOffers({ cityCode, dispatch, myCityCode }) {
   const flightkeyword = `${cityCode}&departureDate=${date}&adults=1`;
 
   const URLFLIGHTOFFERS = `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${myCityCode}&max=10&destinationLocationCode=`;
+
+  function handleClick(index) {
+    setItineraryData({
+      departureDate:
+        flightData?.data?.[
+          index
+        ]?.itineraries?.[0]?.segments?.[0]?.departure?.at.split('T')[0],
+      departureTime: flightData?.data?.[
+        index
+      ]?.itineraries?.[0]?.segments?.[0]?.departure?.at
+        .split('T')[1]
+        .split(':')
+        .slice(0, 2)
+        .join(':'),
+      airFare: flightData?.data?.[index]?.price?.total,
+      currency: flightData?.data?.[index]?.price?.currency,
+    });
+  }
 
   // FETCHING FLIGHT OFFERS
   const {
@@ -87,7 +110,9 @@ export default function FlightOffers({ cityCode, dispatch, myCityCode }) {
 
         return (
           <div key={index}>
-            <div className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 bg-opacity-50'>
+            <div
+              className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 bg-opacity-50 hover:font-extrabold hover:cursor-pointer transition ease-in-out duration-200 active:bg-opacity-90'
+              onClick={() => handleClick(index)}>
               <ul className='flex justify-between '>
                 <li className='text-sm font-extrabold'>Departure Date:</li>
                 <li className='text-xs sm:text-xl md:text-2xl font-extrabold text-[#ACE1AF]'>
