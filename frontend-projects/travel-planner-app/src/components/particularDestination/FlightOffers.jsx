@@ -111,7 +111,7 @@ export default function FlightOffers({
         return (
           <div key={index}>
             <div
-              className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 bg-opacity-50 hover:font-extrabold hover:cursor-pointer transition ease-in-out duration-200 active:bg-opacity-90'
+              className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 bg-opacity-50 hover:bg-opacity-20 hover:cursor-pointer transition ease-in-out duration-200 active:bg-opacity-90'
               onClick={() => handleClick(index)}>
               <ul className='flex justify-between '>
                 <li className='text-sm font-extrabold'>Departure Date:</li>
