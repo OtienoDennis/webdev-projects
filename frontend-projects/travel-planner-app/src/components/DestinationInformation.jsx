@@ -3,7 +3,7 @@ import FlightOffers from './particularDestination/FlightOffers';
 import HotelAccomodations from './particularDestination/HotelAccomodations';
 import TopAttractions from './particularDestination/TopAttractions';
 import WeatherForecast from './particularDestination/WeatherForecast';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from './Button';
 
 export default function DestinationInformation({
@@ -14,14 +14,13 @@ export default function DestinationInformation({
   const { city, cityCode, latitude, longitude } = useParams();
   const [itineraryData, setItineraryData] = useState({});
   const [selectedAttraction, setSelectedAttraction] = useState({});
-  // const [finalItineraryState, setFinalItineraryState] = useState({});
 
   function handleClick() {
     if (
       Object.keys(itineraryData).length < 1 &&
       Object.keys(selectedAttraction).length < 1
     )
-      return alert('Please select a flight and attraction site to visit.');
+      return alert('Please select a flight and attraction site to visit!');
 
     const finalItineraryState = {
       city: city,
@@ -32,15 +31,22 @@ export default function DestinationInformation({
       attractionToVisit: selectedAttraction.attractionToVisit,
     };
 
+    if (!finalItineraryState.attractionToVisit) {
+      return alert('Please select an attraction site to visit!');
+    }
+    if (!finalItineraryState.flightDate) {
+      return alert('Please select a flight to take!');
+    }
+
     const updateItineraryInformation = [...itineraryInformation];
     const index = itineraryInformation.length;
     updateItineraryInformation.splice(index, 1, finalItineraryState);
-
 
     dispatch({
       type: 'itineraryInformation',
       payload: updateItineraryInformation,
     });
+    return alert('Itinerary added successfully!');
   }
 
   return (
