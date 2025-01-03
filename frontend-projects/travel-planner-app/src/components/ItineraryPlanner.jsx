@@ -72,13 +72,15 @@ export default function ItineraryPlanner({ itineraryInformation, dispatch }) {
   }
   return (
     <div>
-      <Button
-        onClick={onCreate}
-        className={
-          'text-white text-xl font-semibold bg-green-700 p-2 rounded-md hover:text-slate-300 hover:cursor-pointer transition ease-in-out duration-200 active:scale-95 fixed left-12 top-28'
-        }>
-        ADD ITINERARY
-      </Button>
+      <div className='flex justify-center my-4'>
+        <Button
+          onClick={onCreate}
+          className={
+            'text-white text-xl font-semibold bg-green-700 p-2 rounded-md hover:text-slate-300 hover:cursor-pointer transition ease-in-out duration-200 active:scale-95'
+          }>
+          ADD ITINERARY
+        </Button>
+      </div>
       <div className='bg-slate-400 mt-5 p-3 rounded-lg bg-opacity-50 relative'>
         {itineraryInformation.map((item, index) => {
           return (
