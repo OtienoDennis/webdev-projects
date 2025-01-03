@@ -238,7 +238,6 @@ export default function TopAttractions({
     setSelectedAttraction({
       attractionToVisit: attractionsList[index].name,
     });
-    console.log( attractionsList[index].name,)
   }
   // FETCHING TOP ATTRACTION SITES
   const {
