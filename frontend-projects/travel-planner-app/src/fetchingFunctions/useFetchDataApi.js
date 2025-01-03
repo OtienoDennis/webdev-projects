@@ -22,7 +22,6 @@ export default function useFetchDataApi(URL, keyword, dispatch, options = {}) {
     }
 
     try {
-      console.log(`${URL}${keyword}`);
       const token = await getAccessToken();
       const response = await fetch(`${URL}${keyword}`, {
         headers: {
@@ -38,11 +37,9 @@ export default function useFetchDataApi(URL, keyword, dispatch, options = {}) {
       if (dispatch && dataActionType) {
         dispatch({ type: dataActionType, payload: result });
       }
-      console.log(result);
     } catch (error) {
       setError(error.message);
       console.error('Error:', error?.message || error);
-      console.log(error);
     } finally {
       setLoading(false);
       if (dispatch && loadingActionType) {
