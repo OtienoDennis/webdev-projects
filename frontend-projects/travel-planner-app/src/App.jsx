@@ -10,17 +10,24 @@ import useFetchMyCityCode from './fetchingFunctions/useFetchMyCityCode';
 import ItineraryPlanner from './components/ItineraryPlanner';
 
 const initialState = {
-  itineraryInformation: 
+  itineraryInformation: [
     {
       city: 'Barcelona',
       flightTime: '19:00',
       flightDate: '2025-01-03',
       airFare: 500,
       currency: 'USD',
-      hotelName: 'Hotel',
       attractionToVisit: 'Museum',
-    }
-  ,
+    },
+    {
+      city: 'Nairobi',
+      flightTime: '19:00',
+      flightDate: '2025-01-03',
+      airFare: 500,
+      currency: 'USD',
+      attractionToVisit: 'Museum',
+    },
+  ],
   destinationInformation: [],
   hotelInformation: [],
   hotelsInCity: [],
@@ -138,13 +145,17 @@ function App() {
                 <DestinationInformation
                   dispatch={dispatch}
                   myCityCode={myCityCode}
+                  itineraryInformation={itineraryInformation}
                 />
               }
             />
             <Route
               path='itinerary'
               element={
-                <ItineraryPlanner itineraryInformation={itineraryInformation} />
+                <ItineraryPlanner
+                  itineraryInformation={itineraryInformation}
+                  dispatch={dispatch}
+                />
               }
             />
             <Route
