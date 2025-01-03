@@ -21,7 +21,7 @@ export default function DestinationInformation({
       Object.keys(itineraryData).length < 1 &&
       Object.keys(selectedAttraction).length < 1
     )
-      return;
+      return alert('Please select a flight and attraction site to visit.');
 
     const finalItineraryState = {
       city: city,
@@ -32,36 +32,30 @@ export default function DestinationInformation({
       attractionToVisit: selectedAttraction.attractionToVisit,
     };
 
-    console.log(itineraryData);
-    console.log(selectedAttraction);
-    console.log(finalItineraryState);
-
     const updateItineraryInformation = [...itineraryInformation];
     const index = itineraryInformation.length;
     updateItineraryInformation.splice(index, 1, finalItineraryState);
 
-    console.log(updateItineraryInformation);
 
-    
     dispatch({
       type: 'itineraryInformation',
       payload: updateItineraryInformation,
     });
   }
 
-
-
   return (
     <div className='rounded-lg py-4 px-2 my-3 bg-slate-500 bg-opacity-30 shadow-lg shadow-white w-11/12 m-auto overflow-y-auto'>
-      <Button
-        onClick={handleClick}
-        className={
-          'text-white text-xl font-semibold bg-green-700 p-2 rounded-md hover:text-slate-300 hover:cursor-pointer transition ease-in-out duration-200 active:scale-95'
-        }>
-        ADD ITINERARY
-      </Button>
+      <div className='flex justify-center mb-4'>
+        <Button
+          onClick={handleClick}
+          className={
+            'text-white text-xl font-semibold bg-green-700 p-2 rounded-md hover:text-slate-300 hover:cursor-pointer transition ease-in-out duration-200 active:scale-95 m-auto'
+          }>
+          ADD ITINERARY
+        </Button>
+      </div>
 
-      <div className='md:grid lg:grid md:grid-cols-2 gap-4 lg:grid-cols-2'>
+      <div className='md:grid lg:grid md:grid-cols-2 gap-4 lg:grid-cols-2 mt-3'>
         <div className='h-screen overflow-y-auto mb-3'>
           <FlightOffers
             cityCode={cityCode}
