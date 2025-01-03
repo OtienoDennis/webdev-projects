@@ -1,7 +1,12 @@
 import useFetchDataApi from '../../fetchingFunctions/useFetchDataApi';
 import ErrorComponent from '../ErrorComponent';
 
-export default function TopAttractions({ latitude, longitude, dispatch }) {
+export default function TopAttractions({
+  latitude,
+  longitude,
+  dispatch,
+  setSelectedAttraction,
+}) {
   const isValidParameters = latitude && longitude;
 
   const URLTOPATTRACTIONS = `https://test.api.amadeus.com/v1/reference-data/locations/pois?latitude=${latitude}&longitude=${longitude}&radius=2&page%5Blimit%5D=10&`;
@@ -229,6 +234,12 @@ export default function TopAttractions({ latitude, longitude, dispatch }) {
     },
   };
 
+  function handleClick(index) {
+    setSelectedAttraction({
+      attractionToVisit: attractionsList[index].name,
+    });
+    console.log( attractionsList[index].name,)
+  }
   // FETCHING TOP ATTRACTION SITES
   const {
     data: attractionsSiteData,
@@ -279,8 +290,9 @@ export default function TopAttractions({ latitude, longitude, dispatch }) {
       {attractionsList.map((obj, index) => {
         return (
           <div
-            className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 hover:font-extrabold hover:cursor-pointer transition ease-in-out duration-200 bg-opacity-50'
-            key={index}>
+            className='border-slate-300 border-2 rounded-md p-2 bg-slate-400 my-2 hover:font-extrabold hover:cursor-pointer transition ease-in-out duration-200 bg-opacity-50 active:bg-opacity-90'
+            key={index}
+            onClick={() => handleClick(index)}>
             <ul className='flex justify-between '>
               <li className='text-md'>{obj.name}</li>
               <li className='text-md'>{obj.category}</li>
