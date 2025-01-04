@@ -5,27 +5,37 @@ import ItineraryModal from './ItineraryModal';
 
 export default function ItineraryPlanner({ itineraryInformation, dispatch }) {
   const [savedState, setSavedState] = useState(true);
+  const [savedStates, setSavedStates] = useState({});
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [valuesToEdit, setValuesToEdit] = useState({});
   const [editedIndex, setEditedIndex] = useState(null);
+
   function onEdit(index) {
     setIsModalOpen(true);
-    setSavedState(false);
+    setSavedStates((prev) => ({ ...prev, [index]: false }));
     setEditedIndex(index);
     setValuesToEdit(itineraryInformation[index]);
   }
 
+
   function onDelete(index) {
     let filteredItineraryInformation = itineraryInformation.filter(
-      (item, idn) => {
-        return idn !== index;
-      }
+      (item, idn) => idn !== index
     );
+
+    setSavedStates((prev) => {
+      const updatedStates = { ...prev };
+      delete updatedStates[index];
+      return updatedStates;
+    });
+
     dispatch({
       type: 'itineraryInformation',
       payload: filteredItineraryInformation,
     });
   }
+
 
   function onCreate() {
     setIsModalOpen(true);
@@ -83,6 +93,8 @@ export default function ItineraryPlanner({ itineraryInformation, dispatch }) {
       </div>
       <div className='bg-slate-400 mt-5 p-3 rounded-lg bg-opacity-50 relative'>
         {itineraryInformation.map((item, index) => {
+          const isSaved = savedStates[index] !== false; // Default to true if not explicitly false
+
           return (
             <div key={index}>
               <div className='flex flex-col items-center gap-5'>
@@ -100,7 +112,7 @@ export default function ItineraryPlanner({ itineraryInformation, dispatch }) {
                   </p>
 
                   <div className='gap-5 mt-5 flex justify-center'>
-                    {savedState && (
+                    {isSaved && (
                       <Button
                         onClick={() => onEdit(index)}
                         className={
@@ -117,9 +129,6 @@ export default function ItineraryPlanner({ itineraryInformation, dispatch }) {
                       }>
                       DELETE
                     </Button>
-                    {/* {!savedState && (
-                      
-                    )} */}
                   </div>
                 </div>
               </div>
@@ -134,7 +143,7 @@ export default function ItineraryPlanner({ itineraryInformation, dispatch }) {
           setIsModalOpen={setIsModalOpen}
           dispatch={dispatch}
           editedIndex={editedIndex}
-          setSavedState={setSavedState}
+          setSavedState={setSavedStates}
         />
       )}
     </div>
