@@ -19,18 +19,22 @@ export default function ItineraryModal({
   const [errors, setErrors] = useState({});
   const modalRef = useRef(null);
 
-  useEffect(() => {
-    const handleOutsideClick = (e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
-        setIsModalOpen(false);
-      }
-    };
+ useEffect(() => {
+   const handleOutsideClick = (e) => {
+     if (modalRef.current && !modalRef.current.contains(e.target)) {
+       setIsModalOpen(false);
+       if (editedIndex !== null && editedIndex !== undefined) {
+         setSavedState((prev) => ({ ...prev, [editedIndex]: true }));
+       }
+     }
+   };
 
-    document.addEventListener('mousedown', handleOutsideClick);
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, [setIsModalOpen]);
+   document.addEventListener('mousedown', handleOutsideClick);
+   return () => {
+     document.removeEventListener('mousedown', handleOutsideClick);
+   };
+ }, [setIsModalOpen, editedIndex, setSavedState]);
+
 
   const validate = () => {
     const newErrors = {};
@@ -55,22 +59,24 @@ export default function ItineraryModal({
       console.log('Form Submitted:', formData);
     }
     if (editedIndex !== null && editedIndex !== undefined) {
-      const updateItineraryInformation = [...itineraryInformation];
-      updateItineraryInformation.splice(editedIndex, 1, formData);
+      const updatedItineraryInformation = [...itineraryInformation];
+      updatedItineraryInformation.splice(editedIndex, 1, formData);
       dispatch({
         type: 'itineraryInformation',
-        payload: updateItineraryInformation,
+        payload: updatedItineraryInformation,
       });
+
+      setSavedState((prev) => ({ ...prev, [editedIndex]: true }));
     }
 
     setIsModalOpen(false);
-    setSavedState(true);
   }
+
   return (
     <div className='relative h-screen bg-gray-200'>
       <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'>
         <form
-        ref={modalRef}
+          ref={modalRef}
           onSubmit={handleSubmit}
           className='bg-slate-800 bg-opacity-70 w-72 md:w-1/3 p-4 rounded-xl '>
           <div className='flex justify-between my-2 text-xl'>
@@ -80,7 +86,8 @@ export default function ItineraryModal({
             <input
               className='bg-slate-400 bg-opacity-70 text-white font-extrabold rounded p-1 outline-none'
               required
-              type='text'
+              type='date'
+              min={new Date().toISOString().split('T')[0]}
               value={formData.flightDate}
               onChange={(e) =>
                 setFormData({ ...formData, flightDate: e.target.value })
