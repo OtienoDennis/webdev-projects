@@ -3,7 +3,7 @@ import FlightOffers from './particularDestination/FlightOffers';
 import HotelAccomodations from './particularDestination/HotelAccomodations';
 import TopAttractions from './particularDestination/TopAttractions';
 import WeatherForecast from './particularDestination/WeatherForecast';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from './Button';
 
 export default function DestinationInformation({
@@ -14,6 +14,16 @@ export default function DestinationInformation({
   const { city, cityCode, latitude, longitude } = useParams();
   const [itineraryData, setItineraryData] = useState({});
   const [selectedAttraction, setSelectedAttraction] = useState({});
+
+  useEffect(() => {
+    const hasAlertShown = localStorage.getItem('alertShown');
+    if (!hasAlertShown) {
+      alert(
+        'Please Click on a FLIGHT and  ATTRACTION SITE to save to itinerary'
+      );
+      localStorage.setItem('alertShown', 'true');
+    }
+  }, []);
 
   function handleClick() {
     if (
