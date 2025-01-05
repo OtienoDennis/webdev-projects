@@ -34,7 +34,7 @@ export default function SearchBar({ dispatch }) {
 
       <input
         type='text'
-        placeholder='Where are you Visiting!'
+        placeholder='Which CITY are you visiting!'
         className='p-2 rounded-md outline-none'
         value={keyword}
         onChange={(e) => setKeyWord(e.target.value)}
