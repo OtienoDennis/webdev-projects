@@ -23,6 +23,10 @@ export default function DestinationInformation({
       );
       localStorage.setItem('alertShown', 'true');
     }
+
+    return () => {
+      localStorage.removeItem('alertShown');
+    };
   }, []);
 
   function handleClick() {
