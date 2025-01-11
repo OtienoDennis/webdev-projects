@@ -10,6 +10,7 @@ export default function TopAttractions({
   const isValidParameters = latitude && longitude;
 
   const URLTOPATTRACTIONS = `https://test.api.amadeus.com/v1/reference-data/locations/pois?latitude=${latitude}&longitude=${longitude}&radius=2&page%5Blimit%5D=10&`;
+  
   const pointsOfInterest = {
     data: [
       {
@@ -265,10 +266,6 @@ export default function TopAttractions({
       </h1>
     );
   }
-
-  // if (attractionsSiteError) {
-  //   return <ErrorComponent errortext={attractionsSiteError} />;
-  // }
 
   function getCategoryAndName(data) {
     return data.data.map((item) => ({
