@@ -96,7 +96,6 @@ function reducer(state, action) {
   }
 }
 
-// const URLDESTINATION = `https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=`;
 const URLDESTINATION = `https://test.api.amadeus.com/v1/reference-data/locations/cities?include=AIRPORTS&keyword=`;
 
 function App() {
