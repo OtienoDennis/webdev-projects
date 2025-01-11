@@ -1,6 +1,11 @@
+const amadeusKey = import.meta.env.VITE_AMADEUS_KEY;
+const amadeusSecret = import.meta.env.VITE_AMADEUS_SECRET;
+
 export default async function getAccessToken() {
-  const clientId = 'bG62EOPuCJLgFV9wmj30VJtH4h3YGsAP';
-  const clientSecret = 'MJylzE6yxyOPK7w5';
+  if (!amadeusKey || !amadeusSecret) {
+    console.error('Amadeus API credentials are not defined.');
+    return null;
+  }
 
   try {
     const response = await fetch(
@@ -12,8 +17,8 @@ export default async function getAccessToken() {
         },
         body: new URLSearchParams({
           grant_type: 'client_credentials',
-          client_id: clientId,
-          client_secret: clientSecret,
+          client_id: amadeusKey,
+          client_secret: amadeusSecret,
         }),
       }
     );
