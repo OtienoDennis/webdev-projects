@@ -63,5 +63,6 @@ For any queries or suggestions, reach out via:
 
 ---
 **Visit:** [Travel Planner App](https://travel-planner-pink-ten.vercel.app/)
+
 ---
 **Happy Traveling! 🌍✈️**
