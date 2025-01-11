@@ -93,7 +93,7 @@ export default function ItineraryPlanner({ itineraryInformation, dispatch }) {
       </div>
       <div className='bg-slate-400 mt-5 p-3 rounded-lg bg-opacity-50 relative'>
         {itineraryInformation.map((item, index) => {
-          const isSaved = savedStates[index] !== false; // Default to true if not explicitly false
+          const isSaved = savedStates[index] !== false;
 
           return (
             <div key={index}>
