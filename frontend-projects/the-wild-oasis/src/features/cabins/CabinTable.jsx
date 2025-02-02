@@ -12,6 +12,7 @@ function CabinTable() {
 
   if (isLoading) return <Spinner />;
   if (!cabins.length) return <Empty resourceName='cabins' />;
+  if (!cabins.length) return <Empty resourceName='cabins' />;
 
   // 1) FILTER
   const filterValue = searchParams.get('discount') || 'all';
@@ -25,11 +26,18 @@ function CabinTable() {
 
   // 2) SORT
   const sortBy = searchParams.get('sortBy') || 'startDate-asc';
+  console.log('Current sortBy:', sortBy);
+
   const [field, direction] = sortBy.split('-');
   const modifier = direction === 'asc' ? 1 : -1;
-  const sortedCabins = filteredCabins.sort(
-    (a, b) => (a[field] - b[field]) * modifier
-  );
+
+  const sortedCabins = [...filteredCabins].sort((a, b) => {
+    if (!a[field] || !b[field]) {
+      console.warn('Invalid field:', field);
+      return 0; // Don't sort if field is missing
+    }
+    return (a[field] > b[field] ? 1 : -1) * modifier;
+  });
 
   return (
     <Menus>
