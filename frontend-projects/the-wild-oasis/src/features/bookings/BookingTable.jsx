@@ -20,7 +20,6 @@ function BookingTable() {
           <div>Dates</div>
           <div>Status</div>
           <div>Amount</div>
-          <div></div>
         </Table.Header>
 
         <Table.Body
@@ -30,7 +29,7 @@ function BookingTable() {
           )}
         />
         <Table.Footer>
-          <Pagination count={count}/>
+          <Pagination count={count} />
         </Table.Footer>
       </Table>
     </Menus>
