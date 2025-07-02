@@ -21,17 +21,18 @@
 
 @font-face {
   font-family: 'NotoSans';
-  src: url('./assets/fonts/static/NotoSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+  src: url('./assets/fonts/static/NotoSans-Italic-VariableFont_wdth,wght.ttf')
+    format('truetype');
   font-style: italic;
 }
 
 @font-face {
   font-family: 'NotoSansVariable';
-  src: url('./assets/fonts/static/NotoSans-VariableFont_wdth,wght.ttf') format('truetype');
+  src: url('./assets/fonts/static/NotoSans-VariableFont_wdth,wght.ttf')
+    format('truetype');
   font-weight: 100 900;
   font-style: normal;
 }
-
 
 :root {
   /* ### Neutral */
@@ -65,16 +66,178 @@
   --font-weight-700: 700;
 }
 
+* {
+  /* border: 1px solid white; */
+}
+
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: var(--neutral-0);
+  font-size: var(--font-size);
+  font-family: 'NotoSans', sans-serif;
+
   height: 100vh;
   background: var(--dark-gradient);
-  /* background-attachment: fixed;
+  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
-*/
+  padding: 20px 0;
 }
 
+button {
+  border: none;
+  border-radius: 16px;
+  padding: 8px 14px;
+  color: var(--neutral-0);
+  cursor: pointer;
+}
+
+/* HEADER SECTION */
+header {
+  border-radius: 12px;
+  background-color: #1a2a44;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+}
+
+header div {
+  padding: 8px 10px;
+}
+
+.logo-icon {
+  display: flex;
+}
+
+.sun-icon {
+  border-radius: 5px;
+  background-color: #2d3d5f;
+  display: flex;
+  margin-right: 10px;
+}
+
+.sun-icon:hover {
+  cursor: pointer;
+}
+
+/* FIRST SECTION */
+
+.list-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 20px;
+  width: 80%;
+}
+
+.list-section div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.selection-btn {
+  background-color: #1a2a44;
+}
+
+/* LAST SECTION */
+
+.items-section {
+  display: flex;
+  width: 80%;
+  gap: 8px;
+}
+
+.card {
+  border: 1px solid var(--neutral-600);
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--neutral-800);
+  gap: 30px;
+  padding: 10px;
+  width: 33%;
+}
+
+.card-description {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.card-description p {
+  font-size: smaller;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.card-btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remove-btn {
+  background-color: #1a2a44;
+  border: 1px solid var(--neutral-300);
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  width: 40px;
+  height: 20px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #ff4444;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
 
 @media screen and (width: 375px) {
   /* Your CSS rules here */
