@@ -94,6 +94,11 @@ button {
   padding: 8px 14px;
   color: var(--neutral-0);
   cursor: pointer;
+  transition: all 0.5s;
+}
+
+button:active {
+  transform: scale(1.05);
 }
 
 /* HEADER SECTION */
