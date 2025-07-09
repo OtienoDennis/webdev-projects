@@ -35,6 +35,8 @@
 }
 
 :root {
+  --background-clr: var(--dark-gradient);
+  --text-clr: var(--neutral-0);
   /* ### Neutral */
 
   --neutral-900: hsl(227, 75%, 14%);
@@ -60,27 +62,105 @@
   /* ## Typography */
 
   --font-size: 16px;
-  /* --font-family: [Noto Sans](https://fonts.google.com/noto/specimen/Noto+Sans); */
-  --font-weight-400: 400;
   --font-weight-500: 500;
   --font-weight-700: 700;
+  /* HEADER CLR */
+  --header-bg-clr: #1a2a44;
+  --header-clr: white;
+  --header-border: none;
+
+  /* HEADER */
+  --image-src: url('./assets/images/icon-sun.svg');
+  --themeIconBgClr: #2d3d5f;
+
+  /* BUTTON */
+  --button-clr: var(--neutral-0);
+  --button-bg-clr: #1a2a44;
+  --button-border: none;
+  --remove-btn-border: 1px solid var(--neutral-300);
+
+  /* CARD SECTION */
+  --card-border: 1px solid var(--neutral-600);
+  --card-bg-clr: var(--neutral-800);
 }
 
-* {
-  /* border: 1px solid white; */
+/* LIGHT AND DARK THEME */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --background-clr: var(--dark-gradient);
+    --text-clr: var(--neutral-0);
+
+    /* HEADER CLR */
+    --header-bg-clr: #1a2a44;
+    --header-clr: white;
+    --header-border: none;
+    /* HEADER */
+    --image-src: url('./assets/images/icon-sun.svg');
+    --themeIconBgClr: #2d3d5f;
+    /* BUTTON */
+    --button-clr: var(--neutral-0);
+    --button-bg-clr: #1a2a44;
+    --button-border: none;
+    /* CARD SECTION */
+    --card-border: 1px solid var(--neutral-600);
+    --card-bg-clr: var(--neutral-800);
+  }
 }
+
+[data-theme='dark'] {
+  --background-clr: var(--dark-gradient);
+  --text-clr: var(--neutral-0);
+  /* HEADER CLR */
+  --header-bg-clr: #1a2a44;
+  --header-clr: white;
+  --header-border: none;
+  /* HEADER */
+  --image-src: url('./assets/images/icon-sun.svg');
+  --themeIconBgClr: #2d3d5f;
+  /* BUTTON */
+  --button-clr: var(--neutral-0);
+  --button-bg-clr: #1a2a44;
+  --button-border: none;
+
+  /* CARD SECTION */
+  --card-border: 1px solid var(--neutral-600);
+  --card-bg-clr: var(--neutral-800);
+}
+
+[data-theme='light'] {
+  --background-clr: var(--light-gradient);
+  --text-clr: var(--neutral-800);
+  /* HEADER CLR */
+  --header-bg-clr: var(--neutral-100);
+  --header-clr: black;
+  --header-border: 1px solid #c7c7c7;
+  /* HEADER */
+  --image-src: url('./assets/images/icon-moon.svg');
+  --themeIconBgClr: #c7c7c7;
+  /* BUTTON */
+  --button-clr: black;
+  --button-bg-clr: var(--neutral-100);
+  --button-border: 1px solid var(--neutral-300);
+
+  /* CARD SECTION */
+  --card-border: 1px solid #c7c7c7;
+  --card-bg-clr: var(--neutral-100);
+}
+
+/*  */
 
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
-  color: var(--neutral-0);
+  color: var(--text-clr);
   font-size: var(--font-size);
   font-family: 'NotoSans', sans-serif;
 
   height: 100vh;
-  background: var(--dark-gradient);
+  background: var(--background-clr);
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -89,30 +169,37 @@ body {
 }
 
 button {
-  border: none;
   border-radius: 16px;
   padding: 8px 14px;
-  color: var(--neutral-0);
+  color: var(--button-clr);
   cursor: pointer;
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
 
-button:active {
+.selection-btn {
+  background-color: var(--button-bg-clr);
+  border: var(--button-border);
+}
+
+.selection-btn:active {
+  background-color: var(--button-clr);
+  color: var(--button-bg-clr);
   transform: scale(1.05);
 }
 
 /* HEADER SECTION */
 header {
   border-radius: 12px;
-  background-color: #1a2a44;
-  color: white;
+  background-color: var(--header-bg-clr);
+  color: var(--header-clr);
+  border: var(--header-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 80%;
 }
 
-header div {
+header .header {
   padding: 8px 10px;
 }
 
@@ -120,14 +207,23 @@ header div {
   display: flex;
 }
 
-.sun-icon {
+.theme-icon {
   border-radius: 5px;
-  background-color: #2d3d5f;
+  background-color: var(--themeIconBgClr);
   display: flex;
   margin-right: 10px;
+  transition: all 0.3s;
+}
+.image {
+  width: 28px;
+  height: 28px;
+  background-image: var(--image-src);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-.sun-icon:hover {
+.theme-icon:hover {
   cursor: pointer;
 }
 
@@ -148,29 +244,25 @@ header div {
   gap: 10px;
 }
 
-.selection-btn {
-  background-color: #1a2a44;
-}
-
 /* LAST SECTION */
 
 .items-section {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   width: 80%;
-  gap: 8px;
+  gap: 10px;
 }
 
 .card {
-  border: 1px solid var(--neutral-600);
+  border: var(--card-border);
   border-radius: 12px;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: var(--neutral-800);
+  background-color: var(--card-bg-clr);
   gap: 30px;
   padding: 10px;
-  width: 33%;
 }
 
 .card-description {
@@ -192,8 +284,14 @@ header div {
 }
 
 .remove-btn {
-  background-color: #1a2a44;
-  border: 1px solid var(--neutral-300);
+  background-color: var(--button-bg-clr);
+  border: var(--remove-btn-border);
+}
+
+.remove-btn:active {
+  background-color: var(--button-clr);
+  color: var(--button-bg-clr);
+  transform: scale(1.05);
 }
 
 .toggle-switch {
@@ -218,9 +316,8 @@ header div {
   top: 0;
   right: 0;
   bottom: 0;
-  right: 0;
   background-color: #ccc;
-  transition: 0.4s;
+  transition: background-color 0.3s, transform 0.3s;
   border-radius: 20px;
 }
 
@@ -232,7 +329,7 @@ header div {
   left: 2px;
   bottom: 2px;
   background-color: white;
-  transition: 0.4s;
+  transition: background-color 0.3s, transform 0.3s;
   border-radius: 50%;
 }
 
@@ -244,6 +341,18 @@ input:checked + .slider:before {
   transform: translateX(20px);
 }
 
+.attribution {
+  justify-self: flex-end;
+}
+.attribution {
+  margin-top: 30px;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+
 @media screen and (width: 375px) {
   /* Your CSS rules here */
 }
+
+/* CHECK AND RESEARCH ON THEMEICON BACKGROUND COLOR AND WHY IT IS NOT FUNCTIONING */
