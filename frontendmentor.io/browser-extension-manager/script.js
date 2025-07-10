@@ -1,5 +1,12 @@
 const itemsSection = document.querySelector('.items-section');
 
+let uiState = 'all';
+
+const allBtn = document.querySelector('.allBtn');
+allBtn.classList.add('redBgColor');
+const activeBtn = document.querySelector('.activeBtn');
+const inactiveBtn = document.querySelector('.inactiveBtn');
+
 const themeIcon = document.querySelector('.theme-icon');
 themeIcon.children[0].src = localStorage.getItem('themeIcon');
 themeIcon.style.backgroundColor = localStorage.getItem('themeIconBgColor');
@@ -38,7 +45,7 @@ window
 
 // ARRAY
 
-const listArray = [
+let listArray = [
   {
     logo: './assets/images/logo-devlens.svg',
     name: 'DevLens',
@@ -158,13 +165,21 @@ function createBtnSection(obj) {
   const removeBtn = document.createElement('button');
   removeBtn.className = 'remove-btn';
   removeBtn.textContent = 'Remove';
+  removeBtn.addEventListener('click', (e) => {
+    const spanName = removeBtn
+      .closest('.card')
+      .querySelector('span').textContent;
+    listArray = listArray.filter((item) => item.name !== spanName);
+    itemsSection.textContent = '';
+    updateUi(uiState);
+  });
 
   const toggleLabel = document.createElement('label');
   toggleLabel.className = 'toggle-switch';
 
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
-  checkbox.checked = obj.isActive
+  checkbox.checked = obj.isActive;
 
   const slider = document.createElement('span');
   slider.className = 'slider';
@@ -178,4 +193,68 @@ function createBtnSection(obj) {
   return cardBtns;
 }
 
-listArray.forEach((obj) => itemsSection.appendChild(createContentCard(obj)));
+function btnBgColor() {
+  return getComputedStyle(document.documentElement)
+    .getPropertyValue('--button-bg-clr')
+    .trim();
+}
+
+// Event Listeners
+allBtn.addEventListener('click', () => {
+  uiState = 'all';
+  updateUi(uiState);
+});
+
+activeBtn.addEventListener('click', () => {
+  uiState = 'active';
+  updateUi(uiState);
+});
+
+inactiveBtn.addEventListener('click', () => {
+  uiState = 'inactive';
+  updateUi(uiState);
+});
+
+function updateUi(state) {
+  if (state === 'all') {
+    allBtn.classList.add('redBgColor');
+    activeBtn.classList.remove('redBgColor');
+    inactiveBtn.classList.remove('redBgColor');
+
+    itemsSection.textContent = '';
+    listArray.forEach((obj) =>
+      itemsSection.appendChild(createContentCard(obj))
+    );
+  }
+
+  if (state === 'active') {
+    allBtn.classList.remove('redBgColor');
+    activeBtn.classList.add('redBgColor');
+    inactiveBtn.classList.remove('redBgColor');
+    itemsSection.textContent = '';
+    listArray.forEach((obj) => {
+      if (obj.isActive) {
+        itemsSection.appendChild(createContentCard(obj));
+      }
+    });
+  }
+
+  if (state === 'inactive') {
+    allBtn.classList.remove('redBgColor');
+    activeBtn.classList.remove('redBgColor');
+    inactiveBtn.classList.add('redBgColor');
+
+    itemsSection.textContent = '';
+    listArray.forEach((obj) => {
+      if (!obj.isActive) {
+        itemsSection.appendChild(createContentCard(obj));
+      }
+    });
+  }
+}
+
+function renderPage() {
+  listArray.forEach((obj) => itemsSection.appendChild(createContentCard(obj)));
+}
+
+renderPage();
