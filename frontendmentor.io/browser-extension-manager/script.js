@@ -175,9 +175,11 @@ function createBtnSection(obj) {
 
   const toggleLabel = document.createElement('label');
   toggleLabel.className = 'toggle-switch';
+  toggleLabel.htmlFor = 'checkbox-name'
 
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
+  checkbox.id = 'checkbox-name'
   checkbox.checked = obj.isActive;
   checkbox.addEventListener('change', (e) => {
     obj.isActive = e.target.checked;
