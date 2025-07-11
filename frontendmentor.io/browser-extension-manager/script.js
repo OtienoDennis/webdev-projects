@@ -161,6 +161,7 @@ function createBtnSection(obj) {
   cardBtns.className = 'card-btns';
 
   const removeBtn = document.createElement('button');
+  removeBtn.type = 'button';
   removeBtn.className = 'remove-btn';
   removeBtn.textContent = 'Remove';
   removeBtn.addEventListener('click', (e) => {
