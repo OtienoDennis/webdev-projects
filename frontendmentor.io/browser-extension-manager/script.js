@@ -139,8 +139,6 @@ function createContentCard(obj) {
 
   const pText = document.createElement('p');
   const span = document.createElement('span');
-  span.style.fontSize = 'larger';
-  span.style.fontWeight = 'bolder';
   span.textContent = obj.name;
 
   const br = document.createElement('br');
