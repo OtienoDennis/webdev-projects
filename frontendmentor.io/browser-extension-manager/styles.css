@@ -179,6 +179,7 @@ main {
 
   padding-top: 10px;
   width: 80%;
+  gap: 8px;
 }
 
 button {
@@ -229,7 +230,7 @@ header .header {
   border-radius: 5px;
   background-color: var(--themeIconBgClr);
   display: flex;
-  margin-right:5px;
+  margin-right: 5px;
   transition: all 0.3s;
 }
 .image {
@@ -380,6 +381,9 @@ input:checked + .slider:before {
   main {
     width: 95%;
   }
+  .list-section {
+    flex-direction: column;
+  }
   .header svg {
     width: 85px;
     height: 20px;
@@ -428,6 +432,9 @@ input:checked + .slider:before {
 @media (min-width: 447px) and (max-width: 607px) {
   main {
     width: 70%;
+  }
+  .list-section {
+    flex-direction: column;
   }
 
   .list-section h1 {
