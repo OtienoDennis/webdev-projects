@@ -180,6 +180,10 @@ function createBtnSection(obj) {
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
   checkbox.checked = obj.isActive;
+  checkbox.addEventListener('change', (e) => {
+    obj.isActive = e.target.checked;
+    updateUi(uiState);
+  });
 
   const slider = document.createElement('span');
   slider.className = 'slider';
