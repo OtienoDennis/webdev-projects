@@ -25,10 +25,10 @@ function App() {
     setSelected(newSelected);
   }
 
-  function handleToggle(index: number) {
+  function handleToggle(name: string) {
     setExtensionData((prevData) =>
-      prevData.map((item, i) =>
-        i === index ? { ...item, isActive: !item.isActive } : item
+      prevData.map((item) =>
+        item.name === name ? { ...item, isActive: !item.isActive } : item
       )
     );
   }
