@@ -1,5 +1,4 @@
 import { useEffect, useState, type JSX } from 'react';
-// import ToggleTheme from './ToggleTheme';
 import LightMode from './ThemeIcons/LightMode';
 import DarkMode from './ThemeIcons/DarkMode';
 
@@ -8,7 +7,6 @@ function Header(): JSX.Element {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    console.log(savedTheme);
     if (savedTheme === 'dark') {
       document.documentElement.classList.add('dark');
       setIsDarkMode(true);
@@ -19,7 +17,6 @@ function Header(): JSX.Element {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
       setIsDarkMode(false);
-      console.log(isDarkMode);
     }
   }, []);
 
