@@ -25,8 +25,8 @@ function Header(): JSX.Element {
       <img
         src={
           isDarkMode
-            ? `src/assets/images/logo-white.svg`
-            : `src/assets/images/logo.svg`
+            ? `/assets/images/logo-white.svg`
+            : `/assets/images/logo.svg`
         }
         alt='logo icon'
         className='dark:text-white'

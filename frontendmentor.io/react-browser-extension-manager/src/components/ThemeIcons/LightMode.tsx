@@ -9,7 +9,7 @@ function LightMode({ setIsDarkMode }: DarkModeProps) {
   }
   return (
     <img
-      src='src/assets/images/icon-sun.svg'
+      src='/assets/images/icon-sun.svg'
       className='bg-[var(--neutral-600)] p-2 rounded-xl cursor-pointer dark:hover:bg-gray-700 '
       alt='Light mode Icon'
       onClick={toggleDark}

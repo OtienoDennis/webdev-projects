@@ -16,7 +16,6 @@ function Button({
       setSelected(children);
       handleSelected(children);
     }
-    console.log(selected);
   }
   return (
     <button

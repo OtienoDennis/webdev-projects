@@ -10,7 +10,7 @@ function DarkMode({ setIsDarkMode }: DarkModeProps) {
   }
   return (
     <img
-      src='src/assets/images/icon-moon.svg'
+      src='/assets/images/icon-moon.svg'
       alt='Dark mode Icon'
       className='bg-[var(--neutral-100)] p-2 rounded-xl cursor-pointer hover:bg-[var(--neutral-300)]'
       onClick={toggleDark}

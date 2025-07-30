@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import ExtensionContent from './components/ExtensionContent';
 import FilterActions from './components/FilterActions';
 import Header from './components/Header';
-import data from './assets/data.json';
+import data from './data/data.json';
 
 function App() {
   const [extensionData, setExtensionData] = useState(data || null);

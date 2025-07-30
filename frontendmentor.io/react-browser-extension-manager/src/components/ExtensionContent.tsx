@@ -17,7 +17,7 @@ function ExtensionContent({
             description={item.description}
             isActive={item.isActive}
             handleToggle={() => handleToggle(item.name)}
-          />
+           />
         );
       })}
     </div>

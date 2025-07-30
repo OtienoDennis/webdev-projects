@@ -15,7 +15,7 @@ const ExtensionCard: React.FC<ExtensionItemWithToggle> = ({
   return (
     <div className='w-full rounded-xl p-4 flex flex-col justify-between h-150px shadow-md bg-[var(--nav-background)]'>
       <div className='flex gap-4 items-center'>
-        <img src={`src/${logo}`} alt={name} className='w-12 h-12' />
+        <img src={`/${logo}`} alt={name} className='w-12 h-12' />
         <div>
           <h2 className='font-bold text-[1rem] mt-2'>{name}</h2>
           <p className='text-sm'>{description}</p>
