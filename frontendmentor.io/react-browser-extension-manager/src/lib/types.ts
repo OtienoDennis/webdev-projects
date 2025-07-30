@@ -8,6 +8,7 @@ export interface ExtensionItemProps {
 export interface ExtensionContentProps {
   filteredData: ExtensionItemProps[];
   handleToggle: (value: string) => void;
+  removeSelected: (value: string) => void;
 }
 
 export interface ButtonProps {
