@@ -8,7 +8,7 @@ function ExtensionContent({
   
   return (
     <div className='grid grid-cols-3 gap-6'>
-      {filteredData.map((item, index) => {
+      {filteredData.map((item) => {
         return (
           <Extensio
           nCard
@@ -17,7 +17,7 @@ function ExtensionContent({
             name={item.name}
             description={item.description}
             isActive={item.isActive}
-            handleToggle={() => handleToggle(index)}
+            handleToggle={() => handleToggle(item.name)}
           />
         );
       })}
