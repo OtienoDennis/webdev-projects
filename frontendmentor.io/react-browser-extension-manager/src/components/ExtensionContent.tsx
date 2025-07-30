@@ -3,9 +3,9 @@ import ExtensionCard from './ExtensionCard';
 
 function ExtensionContent({
   filteredData,
-  handleToggle 
+  handleToggle,
+  removeSelected,
 }: ExtensionContentProps) {
-  
   return (
     <div className='grid grid-cols-3 gap-6'>
       {filteredData.map((item) => {
@@ -17,7 +17,8 @@ function ExtensionContent({
             description={item.description}
             isActive={item.isActive}
             handleToggle={() => handleToggle(item.name)}
-           />
+            removeSelected={() => removeSelected(item.name)}
+          />
         );
       })}
     </div>
