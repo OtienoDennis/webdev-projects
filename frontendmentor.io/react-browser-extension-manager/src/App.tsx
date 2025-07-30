@@ -33,6 +33,12 @@ function App() {
     );
   }
 
+  function removeSelected(name: string) {
+    setExtensionData((prevData) =>
+      prevData.filter((item) => item.name !== name)
+    );
+  }
+
   return (
     <div className='text-[var(--text-clr)] dark:text-[#ededed] max-w-7xl m-auto '>
       <Header />
@@ -44,6 +50,7 @@ function App() {
       <ExtensionContent
         filteredData={filteredData}
         handleToggle={handleToggle}
+        removeSelected={removeSelected}
       />
     </div>
   );
