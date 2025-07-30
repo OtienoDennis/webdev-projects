@@ -10,8 +10,7 @@ function ExtensionContent({
     <div className='grid grid-cols-3 gap-6'>
       {filteredData.map((item) => {
         return (
-          <Extensio
-          nCard
+          <ExtensionCard
             key={item.name}
             logo={item.logo}
             name={item.name}
