@@ -3,6 +3,7 @@ import ToggleSwitch from './ToggleSwitch';
 import type { ExtensionItemProps } from '../lib/types';
 interface ExtensionItemWithToggle extends ExtensionItemProps {
   handleToggle: () => void;
+  removeSelected: () => void;
 }
 
 const ExtensionCard: React.FC<ExtensionItemWithToggle> = ({
@@ -11,6 +12,7 @@ const ExtensionCard: React.FC<ExtensionItemWithToggle> = ({
   description,
   isActive,
   handleToggle,
+  removeSelected,
 }) => {
   return (
     <div className='w-full rounded-xl p-4 flex flex-col justify-between h-150px shadow-md bg-[var(--nav-background)]'>
@@ -22,7 +24,9 @@ const ExtensionCard: React.FC<ExtensionItemWithToggle> = ({
         </div>
       </div>
       <div className='flex items-center justify-between mt-6'>
-        <button className=' hover:bg-[var(--red-700)] cursor-pointer text-sm dark:border-white border-1 px-3 py-[5px] rounded-3xl border-gray-400 transition'>
+        <button
+          className=' hover:bg-[var(--red-700)] cursor-pointer text-sm dark:border-white border-1 px-3 py-[5px] rounded-3xl border-gray-400 transition'
+          onClick={removeSelected}>
           Remove
         </button>
         <ToggleSwitch isActive={isActive} handleToggle={handleToggle} />
