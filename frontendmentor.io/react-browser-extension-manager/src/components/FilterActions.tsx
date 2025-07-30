@@ -10,7 +10,7 @@ export default function FilterActions({
   handleSelected,
 }: FilterActionsExtended) {
   return (
-    <div className=' flex py-6 justify-between'>
+    <div className='flex flex-col py-6 items-center gap-5 justify-between md:flex-row'>
       <h1 className='text-2xl'>Extensions List</h1>
       <div className='flex gap-5'>
         <Button
