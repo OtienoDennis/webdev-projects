@@ -25,7 +25,7 @@ const ExtensionCard: React.FC<ExtensionItemWithToggle> = ({
       </div>
       <div className='flex items-center justify-between mt-6'>
         <button
-          className=' hover:bg-[var(--red-700)] cursor-pointer text-sm dark:border-white border-1 px-3 py-[5px] rounded-3xl border-gray-400 transition'
+          className=' hover:bg-[var(--red-700)] cursor-pointer text-sm dark:border-white border-1 px-3 py-[5px] rounded-3xl border-gray-400 transition text-[var(--text-clr)]'
           onClick={removeSelected}>
           Remove
         </button>
