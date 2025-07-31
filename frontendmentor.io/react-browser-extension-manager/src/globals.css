@@ -27,9 +27,9 @@ html {
   --red-700: hsl(3, 77%, 44%);
 
 .dark {
-  --background: var(--neutral-900);
+  /*--background: var(--neutral-900);
   --text-clr: #ededed;
-  --nav-background: var(--neutral-700);
+  --nav-background: var(--neutral-700);*/
 }
 
 @media (prefers-color-scheme: dark) {
