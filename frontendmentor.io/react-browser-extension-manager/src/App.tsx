@@ -40,7 +40,7 @@ function App() {
   }
 
   return (
-    <div className='px-5 py-10 text-[var(--text-clr)] dark:text-[#ededed] max-w-7xl m-auto '>
+    <div className='bg-[var(--background)] px-5 py-10 text-[var(--text-clr)] dark:text-[#ededed] max-w-7xl m-auto '>
       <Header />
       <FilterActions
         selected={selected}
