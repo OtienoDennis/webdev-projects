@@ -46,6 +46,14 @@ html {
   }
 }
 
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: var(--background);
+    --text-clr: black;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--text-clr);
