@@ -8,9 +8,6 @@ html {
 }
 
 :root {
-  /* --background: var(--dark-gradient); */
-  /* --text-clr: var(--neutral-0); */
-
   --background: hsl(217, 61%, 90%);
   --text-clr: black;
 
@@ -43,14 +40,6 @@ html {
   :root {
     --background: var(--neutral-900);
     --text-clr: #ededed;
-  }
-}
-
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: var(--background);
-    --text-clr: black;
   }
 }
 
