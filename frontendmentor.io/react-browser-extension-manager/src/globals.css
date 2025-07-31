@@ -43,9 +43,3 @@ html {
     --nav-background: var(--neutral-700);
   }
 }
-
-body {
-  background: var(--background);
-  color: var(--text-clr);
-  font-family: 'Noto Sans', sans-serif;
-}
