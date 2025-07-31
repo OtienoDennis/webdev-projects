@@ -12,7 +12,7 @@ html {
   /* --text-clr: var(--neutral-0); */
 
   --background: hsl(217, 61%, 90%);
-  --text-clr: #000000;
+  --text-clr: black;
 
   --nav-background: #fff;
 
