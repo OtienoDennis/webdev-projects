@@ -22,7 +22,7 @@ function Button({
       className={`px-3 py-[0.8px]  dark:hover:bg-gray-700 rounded-2xl cursor-pointer transition duration-200 ${
         children === selected
           ? 'bg-red-600 text-white dark:text-[var(--neutral-900)] text-[18px] border-1 border-white dark:hover:bg-[var(--red-400)]'
-          : 'bg-[var(--nav-background)]'
+          : 'bg-[var(--nav-background)] text-[var(--text-clr)]'
       }`}
       onClick={handleButton
       }>
