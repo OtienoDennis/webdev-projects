@@ -35,7 +35,7 @@ html {
 
 .dark {
   --background: var(--neutral-900);
-  ---text-clr: #ededed;
+  --text-clr: #ededed;
   --nav-background: var(--neutral-700);
 }
 
