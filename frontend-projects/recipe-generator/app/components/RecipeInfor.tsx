@@ -18,17 +18,16 @@ export const RecipeInfor = ({
       <h1 className='font-extrabold text-2xl'>{mealName}</h1>
       <ul className='list-disc list-inside mx-2 grid grid-cols-2 gap-x-3'>
         {ingredients &&
-          Object.values(ingredients).map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
+          ingredients.map((item, index) => <li key={index}>{item}</li>)}
       </ul>
       <h2 className='font-bold sm:mt-3 sm:mb-2'>DIRECTIONS</h2>
       <ol className='list-disc list-inside mx-2'>
-        {instructions && instructions
-          .split('.')
-          .map((step, index) =>
-            step.trim() ? <li key={index}>{step.trim()}</li> : null
-          )}
+        {instructions &&
+          instructions
+            .split('.')
+            .map((step, index) =>
+              step.trim() ? <li key={index}>{step.trim()}</li> : null
+            )}
       </ol>
     </div>
   );
