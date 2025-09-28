@@ -65,6 +65,7 @@ export default function Home() {
   }, []);
 
   const currentRecipe = history[currentIndex];
+  console.log(currentRecipe);
 
   function updateFoods() {
     if (!currentRecipe) return;
