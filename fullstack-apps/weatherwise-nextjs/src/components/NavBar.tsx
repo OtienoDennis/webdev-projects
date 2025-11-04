@@ -9,25 +9,25 @@ function NavBar() {
     <nav className=''>
       <div className='flex justify-between  p-3 rounded-sm items-center md:h-20 shadow-xl/50 bg-[#F0F8FF]'>
         <Logo />
-        
+
         {/* DESKTOP MENU */}
         <ul className='hidden md:flex space-x-6'>
-          <li className='bg-[#BFD7FF] rounded-sm px-1 cursor-pointer'>
+          <li className='bg-[#BFD7FF] rounded-sm px-2 cursor-pointer'>
             <a>Home</a>
           </li>
-          <li className='bg-[#BFD7FF] rounded-sm px-1 cursor-pointer'>
+          <li className='bg-[#BFD7FF] rounded-sm px-2 cursor-pointer'>
             <a>Blog</a>
           </li>
-          <li className='bg-[#BFD7FF] rounded-sm px-1 cursor-pointer'>
+          <li className='bg-[#BFD7FF] rounded-sm px-2 cursor-pointer'>
             <a>Services</a>
           </li>
-          <li className='bg-[#BFD7FF] rounded-sm px-1 cursor-pointer'>
+          <li className='bg-[#BFD7FF] rounded-sm px-2 cursor-pointer'>
             <a>Contact</a>
           </li>
-          <li className='bg-[#BFD7FF] rounded-sm px-1 cursor-pointer'>
+          <li className='bg-[#BFD7FF] rounded-sm px-2 cursor-pointer'>
             <a>About</a>
           </li>
-          <li className='bg-amber-300 rounded-sm px-1 font-bold cursor-pointer'>
+          <li className='bg-amber-300 rounded-sm px-2 font-bold cursor-pointer'>
             <a>Log out</a>
           </li>
         </ul>
@@ -71,7 +71,7 @@ function NavBar() {
           <li className='bg-[#BFD7FF] rounded-sm text-center px-1 cursor-pointer'>
             <a>About</a>
           </li>
-          <li className='bg-amber-300 rounded-sm text-center px-1 font-bold cursor-pointer'>
+          <li className='bg-[#EAA221] rounded-sm text-center px-1 font-bold cursor-pointer'>
             <a>Log out</a>
           </li>
         </ul>
