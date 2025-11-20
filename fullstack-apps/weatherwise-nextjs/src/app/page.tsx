@@ -5,6 +5,7 @@ import Contacts from '@/components/Contacts';
 import Advert from '@/components/Advert';
 
 export default function Home() {
+  console.log(process.env.WEATHER_API_KEY)
   return (
     <div className='bg-[#BFD7FF] h-screen p-3 md:px-10 overflow-auto relative text-black'>
       <h1 className='font-bold text-xl md:text-3xl text-center p-2'>
