@@ -1,13 +1,14 @@
-import NavBar from '@/components/NavBar';
-import DashboardUI from './dashboard/DashboardUI';
-import OtherCities from '@/components/OtherCities';
-import Contacts from '@/components/Contacts';
 import Advert from '@/components/Advert';
+import Contacts from '@/components/Contacts';
+import NavBar from '@/components/NavBar';
+import OtherCities from '@/components/OtherCities';
+import DashboardUI from './dashboard/DashboardUI';
 
-export default function Home() {
-  console.log(process.env.WEATHER_API_KEY)
+export default async function Home() {
+  console.log(process.env.WEATHER_API_KEY);
+
   return (
-    <div className='bg-[#BFD7FF] h-screen p-3 md:px-10 overflow-auto relative text-black'>
+    <div className='bg-[#BFD7FF] h-screen p-3 md:px-10 overflow-auto relative text-black flex flex-col justify-evenly md:block'>
       <h1 className='font-bold text-xl md:text-3xl text-center p-2'>
         Weather Wise App
       </h1>
