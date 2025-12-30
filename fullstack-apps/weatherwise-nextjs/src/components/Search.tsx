@@ -1,14 +1,20 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { KeyboardEvent, useRef, useState } from 'react';
 
-export default function Search() {
+interface DashboardUIProps<T extends object> {
+  setData: (data: T) => void;
+}
+
+export default function Search<T extends object>({
+  setData,
+}: DashboardUIProps<T>) {
   const cityRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   // API CALL
   const getWeatherData = async (city: string) => {
-    console.log(process.env.NEXT_PUBLIC_WEATHER_API_KEY);
+    // console.log(process.env.NEXT_PUBLIC_WEATHER_API_KEY);
     try {
       setIsLoading(true);
       const response = await fetch(
@@ -20,6 +26,7 @@ export default function Search() {
 
       const data = await response.json();
       console.log(data);
+      setData(data);
       return data;
     } catch (error) {
       console.error('Error fetching weather data:', error);
@@ -40,6 +47,10 @@ export default function Search() {
     }
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleClick();
+  };
+
   return (
     <div className='flex justify-between gap-3 w-[100%] md:w-[44vw]'>
       <input
@@ -47,6 +58,7 @@ export default function Search() {
         className='bg-[#e3e4e6] text-2xl p-3 w-3/3 rounded-2xl h-11 focus:outline-none'
         placeholder='Enter city name!'
         disabled={isLoading}
+        onKeyDown={handleKeyDown}
       />
       <button
         className='font-extrabold text-3xl bg-[#EAA221] p-1 rounded-lg cursor-pointer text-white'
